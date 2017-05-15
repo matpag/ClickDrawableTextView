@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="CsDrawableViewManager">
+        <!-- start drawable properties -->
+        <attr name="csStartDrawable" format="reference" />
+        <attr name="csStartDrawableHeight" format="dimension" />
+        <attr name="csStartDrawableWidth" format="dimension" />
+        <attr name="csStartDrawableVisible" format="boolean" />
+
+        <!-- end drawable properties -->
+        <attr name="csEndDrawable" format="reference" />
+        <attr name="csEndDrawableHeight" format="dimension" />
+        <attr name="csEndDrawableWidth" format="dimension" />
+        <attr name="csEndDrawableVisible" format="boolean" />
+
+        <!-- top drawable properties -->
+        <attr name="csTopDrawable" format="reference" />
+        <attr name="csTopDrawableHeight" format="dimension" />
+        <attr name="csTopDrawableWidth" format="dimension" />
+        <attr name="csTopDrawableVisible" format="boolean" />
+
+        <!-- bottom drawable properties -->
+        <attr name="csBottomDrawable" format="reference" />
+        <attr name="csBottomDrawableHeight" format="dimension" />
+        <attr name="csBottomDrawableWidth" format="dimension" />
+        <attr name="csBottomDrawableVisible" format="boolean" />
+
+        <!-- RTL support -->
+        <attr name="csEnableRTL" format="boolean" />
+    </declare-styleable>
+
+</resources>
