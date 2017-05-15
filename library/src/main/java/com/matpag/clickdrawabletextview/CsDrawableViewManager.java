@@ -41,8 +41,12 @@ final class CsDrawableViewManager implements ClickableDrawable {
 
     private static DisplayMetrics mMetrics;
 
+    //default true
     private boolean enableTouchOnText = true;
-    private boolean enableRTL;
+
+    //default true
+    private boolean enableRTL = true;
+
     private Configuration mConfig;
 
     /**
@@ -149,7 +153,7 @@ final class CsDrawableViewManager implements ClickableDrawable {
             }
 
             enableRTL = a.getBoolean(R.styleable.CsDrawableViewManager_csEnableRTL,
-                    false);
+                    true);
 
             a.recycle();
         }

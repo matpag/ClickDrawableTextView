@@ -26,7 +26,6 @@
         app:csBottomDrawable="@drawable/close_blue"
         app:csBottomDrawableHeight="30dp"
         app:csBottomDrawableWidth="30dp"
-        app:csEnableRTL="true"
         android:drawablePadding="10dp"
         />
 
