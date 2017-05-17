@@ -18,7 +18,7 @@ TODO (waiting for jcenter approval)
 
 ## API Docs
 
-The library provides 3 widget with extended functionality for the drawables.
+The library provides 3 views with extended functionalities for drawables.
 
 Those are:
 
@@ -34,11 +34,11 @@ compatibility with every SDK version.
 You can add a ```CsDrawable``` via XML or via Code, below i will show you both the implementations
 
 #### XML
-After had declared
+After declaring
 ```
 xmlns:app="http://schemas.android.com/apk/res-auto"
 ```
-in the top parent layout you can specify all those properties
+in the top parent layout, you can specify the custom properties shown below
 
 ```
 <com.matpag.clickdrawabletextview.ClickDrawableEditText
@@ -59,7 +59,6 @@ in the top parent layout you can specify all those properties
         app:csBottomDrawable="@drawable/close_blue"
         app:csBottomDrawableHeight="30dp"
         app:csBottomDrawableWidth="30dp"
-        app:csEnableRTL="true"
         />
 ```
 
@@ -73,7 +72,7 @@ app:csBottomDrawable
 providing a reference to a drawable of any type.
 
 If you don't specify any size for the drawable, automatically the drawable will be sized
-to the width and height of the drawable itself (alled **intrinsic** in the android
+to the width and height of the drawable itself (called **intrinsic** in the android
 platform).
 
 If you dont want to resize your original drawable resource, i suggest you to
@@ -106,13 +105,8 @@ app:csEndDrawableVisible
 app:csTopDrawableVisible
 app:csBottomDrawableVisible
 ```
-with ```true```(default) or ```false``` attribute
+with ```true```(default) or ```false``` value
 
-If you need to support RTL locales, you can enable it with
-```
-app:csEnableRTL="true"
-```
-with ```true```(default in the next release) or ```false``` attribute.
 
 Don't forget to enable the RTL support in your ```AndroidManifest.xml``` adding
 ```android:supportsRtl="true"``` to the *application* tag
