@@ -9,14 +9,50 @@ with ```android:drawableStart``` etc... or in code with
 
 ## Demo GIF
 
-TODO add demo GIF (maybe hosted on my domain)
-
+TODO add demo GIF
 
 ## Installing
 
-TODO (waiting for jcenter approval)
+I'm waiting for jcenter support team to approve the library
 
-## API Docs
+To let the library work correctly, the first thing you need to call is
+```CsDrawableSettings.init(Context context, String packageName)```
+
+I suggest you to init the library at the end of ```onCreate()``` method of your
+ custom ```Application``` class,
+If you dont have a custom ```Application``` class, you can create one like this:
+
+```java
+public class AppApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        //Init the library
+        CsDrawableSettings.init(this, BuildConfig.APPLICATION_ID);
+    }
+}
+```
+then you need to change your ```AndroidManifest.xml``` to load your custom
+application class instead of the default one adding the
+```android:name".AppApplication"``` (you should update the path accordingly based
+on where you create the ```AppApplication``` class) to the manifest.
+
+Something similar to this:
+```
+<application
+        android:name=".AppApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        ....>
+
+        <!-- Other declarations -->
+
+</application>
+```
+
+
+## Docs
 
 The library provides 3 views with extended functionalities for drawables.
 
@@ -31,7 +67,10 @@ Those are:
 Each of them it's extending the ```AppCompat``` counterpart for max
 compatibility with every SDK version.
 
-You can add a ```CsDrawable``` via XML or via Code, below i will show you both the implementations
+The custom drawables are ```CsDrawable```s objects.
+
+You can add a ```CsDrawable``` via XML or via Code,
+below you can find both the implementations
 
 #### XML
 After declaring

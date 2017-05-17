@@ -1,1 +1,1 @@
-No release at the moment
+This file will not be updated until the first public release
