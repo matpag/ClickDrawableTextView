@@ -97,8 +97,4 @@ public class ClickDrawableEditText extends AppCompatEditText implements Clickabl
         mCsDrawableViewManager.enableFocusOnText(openKeyboard);
     }
 
-    @Override
-    public void enableRTL(boolean enable) {
-        mCsDrawableViewManager.enableRTL(enable);
-    }
 }

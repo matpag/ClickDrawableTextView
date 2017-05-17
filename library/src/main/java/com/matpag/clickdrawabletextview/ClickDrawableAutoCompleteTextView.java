@@ -88,10 +88,6 @@ public class ClickDrawableAutoCompleteTextView extends AppCompatAutoCompleteText
         mCsDrawableViewManager.removeAllCsDrawables();
     }
 
-    @Override
-    public void enableRTL(boolean enable) {
-        mCsDrawableViewManager.enableRTL(enable);
-    }
 
     @Override
     public void disableFocusOnText(boolean preventReFocus, boolean closeKeyboard) {

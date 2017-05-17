@@ -13,7 +13,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
-import com.matpag.ui.clickdrawable.R;
 import com.matpag.clickdrawabletextview.interfaces.ClickableDrawable;
 import com.matpag.clickdrawabletextview.interfaces.OnDrawableClickListener;
 
@@ -43,9 +42,6 @@ final class CsDrawableViewManager implements ClickableDrawable {
 
     //default true
     private boolean enableTouchOnText = true;
-
-    //default true
-    private boolean enableRTL = true;
 
     private Configuration mConfig;
 
@@ -152,9 +148,6 @@ final class CsDrawableViewManager implements ClickableDrawable {
                 mBottomDrawable.setVisibility(visibility);
             }
 
-            enableRTL = a.getBoolean(R.styleable.CsDrawableViewManager_csEnableRTL,
-                    true);
-
             a.recycle();
         }
 
@@ -164,8 +157,8 @@ final class CsDrawableViewManager implements ClickableDrawable {
     }
 
     /**
-     * Check if the current Locale is in RTL mode and if the user has enabled the view to use it
-     * with {@link #enableRTL(boolean)}
+     * Check if the current Locale is in RTL mode and if the user has enabled the view to support
+     * it in the <code>AndroidManifest.xml</code> of his app
      *
      * NOTE: We should use <code>ViewCompat.getLayoutDirection(view) ==
      * ViewCompat.LAYOUT_DIRECTION_RTL</code> but when you use developer option : Force RTL Layout
@@ -177,7 +170,8 @@ final class CsDrawableViewManager implements ClickableDrawable {
      * @return true if in RTL, false otherwise
      */
     private boolean isLayoutRTL(){
-        return mConfig.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL && enableRTL;
+        return CsDrawableSettings.isRtlSupportEnabled() &&
+                mConfig.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
     }
 
     /**
@@ -206,8 +200,7 @@ final class CsDrawableViewManager implements ClickableDrawable {
 
     /**
      * Add the compound drawables to the view, if the Locale of the user is in
-     * RTL mode and {@link #enableRTL} is true the drawable will be added
-     * in the proper position
+     * RTL mode the drawables will be added in the proper position
      */
     private void addCompoundDrawablesRelative(){
         view.setCompoundDrawablesRelative(
@@ -367,12 +360,6 @@ final class CsDrawableViewManager implements ClickableDrawable {
             mBottomDrawable.setVisibility(visible);
             invalidateDrawables();
         }
-    }
-
-    @Override
-    public void enableRTL(boolean enable) {
-        enableRTL = enable;
-        invalidateDrawables();
     }
 
     @Override

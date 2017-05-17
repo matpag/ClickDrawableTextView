@@ -25,8 +25,8 @@ public interface ClickableDrawable {
 
     /**
      * Add the start drawable to the view, default the LEFT drawable.
-     * If {@link #enableRTL(boolean)} with <code>true</code> is called, this could be the
-     * LEFT or RIGHT drawable based on the user locale
+     * this could be the LEFT or RIGHT drawable based on the user locale if the developer
+     * has added <code>android:supportsRtl="true"</code> in his <code>AndroidManifest.xml</code>
      * @param csDrawable the CsDrawable object (can be null)
      */
     void addStartCsDrawable(CsDrawable csDrawable);
@@ -39,8 +39,8 @@ public interface ClickableDrawable {
 
     /**
      * Add the end drawable to the view, default the RIGHT drawable.
-     * If {@link #enableRTL(boolean)} with <code>true</code> is called, this could be the
-     * LEFT or RIGHT drawable based on the user locale
+     * this could be the LEFT or RIGHT drawable based on the user locale if the developer
+     * has added <code>android:supportsRtl="true"</code> in his <code>AndroidManifest.xml</code>
      * @param csDrawable the CsDrawable object (can be null)
      */
     void addEndCsDrawable(CsDrawable csDrawable);
@@ -79,24 +79,6 @@ public interface ClickableDrawable {
      * Remove all the {@link CsDrawable} objects to the view
      */
     void removeAllCsDrawables();
-
-    /**
-     * <p>
-     *     Enable the support for RTL languagues, obviously you should have setted the properties
-     *     <code>android:supportsRtl="true"</code> in the AndroidManifest.xml for the locales suporting
-     *     this convention.
-     * </p>
-     *
-     * <p>
-     *     Enabling this means that your {@link CsDrawable} objects in START and END position could
-     *     be inverted in some Locale
-     * </p>
-     *
-     * @param enable <code>true</code> to enable support to <code>RTL</code> locales,
-     *               <code>false</code> to block everything in <code>LTR</code>.
-     *               default: false
-     */
-    void enableRTL(boolean enable);
 
     /**
      * <p>

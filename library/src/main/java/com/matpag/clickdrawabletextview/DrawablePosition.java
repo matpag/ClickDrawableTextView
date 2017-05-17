@@ -1,6 +1,7 @@
 package com.matpag.clickdrawabletextview;
 
 /**
+ * Enum position
  * Created by Mattia Pagini on 13/02/2017.
  */
 

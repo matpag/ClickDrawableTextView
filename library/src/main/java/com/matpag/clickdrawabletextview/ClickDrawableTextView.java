@@ -97,8 +97,4 @@ public class ClickDrawableTextView extends AppCompatTextView implements Clickabl
         mCsDrawableViewManager.removeAllCsDrawables();
     }
 
-    @Override
-    public void enableRTL(boolean enable) {
-        mCsDrawableViewManager.enableRTL(enable);
-    }
 }
