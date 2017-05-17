@@ -25,9 +25,6 @@
         <attr name="csBottomDrawableHeight" format="dimension" />
         <attr name="csBottomDrawableWidth" format="dimension" />
         <attr name="csBottomDrawableVisible" format="boolean" />
-
-        <!-- RTL support -->
-        <attr name="csEnableRTL" format="boolean" />
     </declare-styleable>
 
 </resources>
