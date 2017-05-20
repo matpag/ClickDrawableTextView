@@ -4,7 +4,7 @@ publish {
     bintrayKey = project.hasProperty('bintray.apikey') ? project.property('bintray.apikey') : System.getenv('BINTRAY_API_KEY')
     repoName = project.property("REPOSITORY_NAME")
     userOrg = project.property("POM_DEVELOPER_ID")
-    groupId = project.property("POM_PACKAGE_GROUP")
+    groupId = project.property("POM_GROUP")
     artifactId = project.property("POM_ARTIFACT_ID")
     publishVersion = project.property("VERSION_NAME")
     desc = project.property("POM_DESCRIPTION")

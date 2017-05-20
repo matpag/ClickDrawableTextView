@@ -8,8 +8,8 @@ android {
     defaultConfig {
         minSdkVersion setup.minSdk
         targetSdkVersion setup.targetSdk
-        versionCode 2
-        versionName "0.5.1"
+        versionCode 52
+        versionName "0.5.2"
 
         vectorDrawables.useSupportLibrary = true
     }
@@ -21,7 +21,8 @@ android {
     }
 }
 
-apply from: '../gradle-jcenter-push.gradle'
+apply from: 'gradle-jcenter-push.gradle'
+apply from: 'gradle-mvn-push.gradle'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
