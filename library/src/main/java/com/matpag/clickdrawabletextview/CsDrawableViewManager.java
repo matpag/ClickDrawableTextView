@@ -9,6 +9,7 @@ import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
 import android.view.View;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
@@ -47,15 +48,18 @@ final class CsDrawableViewManager implements ClickableDrawable {
 
     /**
      * Max allowed duration for a "click", in milliseconds.
+     *
+     * I've played a bit with the default android value for recognize a touch
+     * at {@link ViewConfiguration#getTapTimeout()} but it seemed to me a little to small
+     * for a normal touch, so i decided to double the amount
      */
-    private static final int MAX_CLICK_DURATION = 1500;
+    private static final int MAX_CLICK_DURATION = ViewConfiguration.getTapTimeout() * 2;
 
     /**
      * Max allowed distance to move during a "click", in DP.
      */
     private static final int MAX_CLICK_DISTANCE = 15;
 
-    private long pressStartTime;
     private float pressedX;
     private float pressedY;
     private boolean stayedWithinClickDistance;
@@ -221,9 +225,8 @@ final class CsDrawableViewManager implements ClickableDrawable {
             public boolean onTouch(View v, MotionEvent e) {
                 switch (e.getAction()) {
                     case MotionEvent.ACTION_DOWN: {
-                        //se ho cliccato uno dei drawable, allora me lo salvo
+                        //if the user clicked on one of the drawables, save some datas about it
                         if (isOneOfDrawablesTouched(e)) {
-                            pressStartTime = System.currentTimeMillis();
                             pressedX = e.getX();
                             pressedY = e.getY();
                             stayedWithinClickDistance = true;
@@ -234,6 +237,8 @@ final class CsDrawableViewManager implements ClickableDrawable {
                         break;
                     }
                     case MotionEvent.ACTION_MOVE: {
+                        //if the user moved the finger to much far from the initial tap point,
+                        //we cancel the touch on the drawable
                         if (stayedWithinClickDistance && distance(pressedX, pressedY, e.getX(),
                                         e.getY()) > MAX_CLICK_DISTANCE) {
                             stayedWithinClickDistance = false;
@@ -241,19 +246,19 @@ final class CsDrawableViewManager implements ClickableDrawable {
                         break;
                     }
                     case MotionEvent.ACTION_UP: {
-                        long pressDuration = System.currentTimeMillis() - pressStartTime;
-                        if ((pressDuration < MAX_CLICK_DURATION) && stayedWithinClickDistance
-                                && mTouchedPosition != null) {
-                            dispatchDrawableClickEvent();
+                        long eventDuration = e.getEventTime() - e.getDownTime();
+                        if (mTouchedPosition != null){
+                            if ((eventDuration < MAX_CLICK_DURATION) && stayedWithinClickDistance) {
+                                dispatchDrawableClickEvent();
+                                //dispatch accessibility events (even if the lint checker is still
+                                //complaining about this
+                                view.performClick();
+                            }
                             resetTouchedDrawable();
-                            //dispatch accessibility events (even if the lint checker is still
-                            //complaining about this
-                            view.performClick();
                             return true;
                         }
                     }
                 }
-                resetTouchedDrawable();
                 return false;
             }
         });
