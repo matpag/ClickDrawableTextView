@@ -8,6 +8,14 @@
     android:id="@+id/parent_panel"
     tools:context="com.matpag.sample.MainActivity">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="ClickDrawableEditText"
+        android:textSize="15sp"
+        android:gravity="center_horizontal"
+        android:textColor="@android:color/darker_gray"/>
+
     <com.matpag.clickdrawabletextview.ClickDrawableEditText
         android:id="@+id/click_drawable_edit_text"
         android:layout_width="match_parent"
@@ -29,54 +37,19 @@
         android:drawablePadding="10dp"
         />
 
-    <com.matpag.clickdrawabletextview.ClickDrawableEditText
-        android:id="@+id/click_drawable_edit_text2"
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="10dp"
-        android:paddingTop="20dp"
-        app:csStartDrawable="@drawable/gray_circle"
-        app:csStartDrawableHeight="30dp"
-        app:csStartDrawableWidth="30dp"
-        android:drawablePadding="10dp"
-        />
-
-    <!--
-        This is a HorizontalScrollView to show that the library takes into account
-        the X offset scroll parameter to get the correct position of the drawable
-     -->
-    <HorizontalScrollView
-        android:layout_width="match_parent"
-        android:layout_height="30dp">
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
-
-            <View
-                android:background="#000000"
-                android:layout_width="300dp"
-                android:layout_height="100dp" />
-
-            <View
-                android:background="#f00500"
-                android:layout_width="300dp"
-                android:layout_height="100dp" />
-
-            <com.matpag.clickdrawabletextview.ClickDrawableTextView
-                android:id="@+id/click_drawable_text_view"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                app:csStartDrawable="@drawable/close_blue"
-                app:csStartDrawableHeight="30dp"
-                app:csStartDrawableWidth="30dp"/>
-
-        </LinearLayout>
-    </HorizontalScrollView>
+        android:layout_marginTop="50dp"
+        android:text="ClickDrawableAutoCompleteTextView"
+        android:textSize="15sp"
+        android:gravity="center_horizontal"
+        android:textColor="@android:color/darker_gray"/>
 
     <com.matpag.clickdrawabletextview.ClickDrawableAutoCompleteTextView
         android:id="@+id/click_drawable_auto_text_view"
         android:layout_width="match_parent"
+        android:padding="20dp"
         android:layout_height="wrap_content"
         android:completionThreshold="1"/>
 

@@ -9,19 +9,14 @@ import android.widget.Toast;
 
 import com.matpag.clickdrawabletextview.ClickDrawableAutoCompleteTextView;
 import com.matpag.clickdrawabletextview.ClickDrawableEditText;
-import com.matpag.clickdrawabletextview.ClickDrawableTextView;
 import com.matpag.clickdrawabletextview.CsDrawable;
 import com.matpag.clickdrawabletextview.DrawablePosition;
 import com.matpag.clickdrawabletextview.interfaces.OnDrawableClickListener;
 
-
+/**
+ * Showcase activity
+ */
 public class MainActivity extends AppCompatActivity {
-
-    private ClickDrawableAutoCompleteTextView mCdAutoComplete;
-
-    private ClickDrawableTextView mCdTextView;
-
-    private ClickDrawableEditText mCdEditText, mCdEditText2;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,47 +26,22 @@ public class MainActivity extends AppCompatActivity {
         //####### ClickDrawableEditText example ########
         //In this example we got the view from the XML, so go watch R.layout.activity_main to
         //understand more on how the properties were configured
-        mCdEditText = (ClickDrawableEditText)
+        final ClickDrawableEditText mCdEditText = (ClickDrawableEditText)
                 findViewById(R.id.click_drawable_edit_text);
         mCdEditText.setOnDrawableClickListener(new OnDrawableClickListener() {
             @Override
             public void onClick(View view, DrawablePosition position) {
                 Toast.makeText(MainActivity.this, position.name(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        mCdEditText2 = (ClickDrawableEditText)
-                findViewById(R.id.click_drawable_edit_text2);
-        mCdEditText2.setOnDrawableClickListener(new OnDrawableClickListener() {
-            @Override
-            public void onClick(View view, DrawablePosition position) {
-                Toast.makeText(MainActivity.this, position.name(), Toast.LENGTH_SHORT).show();
-            }
-        });
-
-        //####### ClickDrawableTextView example ########
-        //In this example we got the view from the XML, so go watch R.layout.activity_main to
-        //understand more on how the properties were configured
-        mCdTextView = (ClickDrawableTextView)
-                findViewById(R.id.click_drawable_text_view);
-        mCdTextView.setOnDrawableClickListener(new OnDrawableClickListener() {
-            @Override
-            public void onClick(View view, DrawablePosition position) {
-                Toast.makeText(MainActivity.this, position.name(), Toast.LENGTH_SHORT).show();
+                //close the keyboard if opened
+                mCdEditText.closeKeyboard();
             }
         });
 
 
         //######## ClickDrawableAutoCompleteTextView example ############
-        mCdAutoComplete = (ClickDrawableAutoCompleteTextView)
-                findViewById(R.id.click_drawable_auto_text_view);
-        setUpClickDrawableAutoCompleteTextView();
-    }
+        final ClickDrawableAutoCompleteTextView mCdAutoComplete =
+                (ClickDrawableAutoCompleteTextView) findViewById(R.id.click_drawable_auto_text_view);
 
-    /**
-     * An advanced sample on how to use a {@link ClickDrawableAutoCompleteTextView}
-     */
-    private void setUpClickDrawableAutoCompleteTextView(){
         //build a CsDrawable object with a PGN drawable
         CsDrawable csDrawable1 = new CsDrawable.Builder(this, R.drawable.ic_close_red_24dp)
                 .setDrawableDpSize(30, 30)
@@ -91,7 +61,9 @@ public class MainActivity extends AppCompatActivity {
         mCdAutoComplete.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                //show the cancel drawable
                 mCdAutoComplete.showEndCsDrawable(true);
+                //prevent user to change the value without prior clicking on the cancel drawable
                 mCdAutoComplete.disableFocusOnText(true, true);
             }
         });
@@ -103,13 +75,15 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view, DrawablePosition position) {
                 switch (position){
                     case END: //if we touched the END drawable
+                        //hide the close drawable
                         mCdAutoComplete.showEndCsDrawable(false);
+                        //get focus on input (opening the keyboard)
                         mCdAutoComplete.enableFocusOnText(true);
+                        //reset text
                         mCdAutoComplete.setText("");
                         break;
                 }
             }
         });
-
     }
 }
