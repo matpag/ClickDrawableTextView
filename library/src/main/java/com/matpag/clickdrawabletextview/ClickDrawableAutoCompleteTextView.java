@@ -103,4 +103,14 @@ public class ClickDrawableAutoCompleteTextView extends AppCompatAutoCompleteText
     public void setEnabled(boolean enabled) {
         super.setEnabled(enabled);
     }
+
+    @Override
+    public void openKeyboard() {
+        mCsDrawableViewManager.openKeyboard();
+    }
+
+    @Override
+    public void closeKeyboard() {
+        mCsDrawableViewManager.closeKeyboard();
+    }
 }

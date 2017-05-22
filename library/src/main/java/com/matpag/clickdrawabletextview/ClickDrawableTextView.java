@@ -93,6 +93,16 @@ public class ClickDrawableTextView extends AppCompatTextView implements Clickabl
     }
 
     @Override
+    public void openKeyboard() {
+        throw new IllegalArgumentException("TextView can't be edited with keyboard");
+    }
+
+    @Override
+    public void closeKeyboard() {
+        throw new IllegalArgumentException("TextView can't be edited with keyboard");
+    }
+
+    @Override
     public void removeAllCsDrawables() {
         mCsDrawableViewManager.removeAllCsDrawables();
     }

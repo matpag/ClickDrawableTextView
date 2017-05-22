@@ -104,4 +104,14 @@ public interface ClickableDrawable {
      */
     void enableFocusOnText(boolean openKeyboard);
 
+    /**
+     * Helper method to close the keyboard if the IME is currently opened
+     */
+    void closeKeyboard();
+
+    /**
+     * Helper method to open the keyboard on the current view if the IME is currently closed
+     */
+    void openKeyboard();
+
 }

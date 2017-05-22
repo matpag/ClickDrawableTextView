@@ -395,6 +395,16 @@ final class CsDrawableViewManager implements ClickableDrawable {
         }
     }
 
+    @Override
+    public void openKeyboard() {
+        setImeVisibility(true);
+    }
+
+    @Override
+    public void closeKeyboard() {
+        setImeVisibility(false);
+    }
+
     /**
      * Open the keyboard with some Google trick
      * <a href="http://stackoverflow.com/a/13306632/2910520">Link here</a>
