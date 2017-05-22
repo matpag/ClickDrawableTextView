@@ -9,7 +9,7 @@ with ```android:drawableStart``` etc... or in code with
 
 ## Demo GIF
 
-TODO add demo GIF
+![Library showcase](https://media.giphy.com/media/xUA7aXqmppLR7a0JfG/giphy.gif)
 
 ## Installing
 
