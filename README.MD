@@ -13,7 +13,8 @@ with ```android:drawableStart``` etc... or in code with
 
 ## Installing
 
-I'm waiting for jcenter support team to approve the library
+Add this to your dependency
+```compile 'com.matpag:clickdrawabletextview:0.6.0'```
 
 To let the library work correctly, the first thing you need to call is
 ```CsDrawableSettings.init(Context context, String packageName)```
