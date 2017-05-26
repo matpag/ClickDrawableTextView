@@ -1,27 +1,86 @@
-#### This README it's under development, i need few days more to complete everything
+## ClickDrawable - TextView/EditText/AutoComplete
 
-## ClickDrawable[TextView / EditText / AutoCompleteTextView]
+This library add the ability to listen for drawable click events for TextView, EditText and AutoCompleteTextView normally added in XML
+with ```android:drawableStart``` etc... or in code with ```setCompoundDrawables(...)``` and similar.
+With this library you can flat a layout using every Widget and an ```ImageView``` or ```ImageButton``` on one side to listen for click on the image to one unique view.
 
-This library add the ability to listen for drawable click events for
-TextView, EditText and AutoCompleteTextView normally added in XML
-with ```android:drawableStart``` etc... or in code with
-```setCompoundDrawables(...)``` and similar.
+For example converting this XML:
+```
+<LinearLayout 
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+    <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="this textview looks nice"/>
+    <ImageView
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            app:srcCompat="@drawable/my_icon
+            android:text="this textview looks nice"/>
+</LinearLayout> 
+```
+Into this:
+```
+<com.matpag.clickdrawabletextview.ClickDrawableTextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="this textview looks nice"
+        app:csStartDrawable="@drawable/my_icon
+        app:csStartDrawableHeight="30dp"
+        app:csStartDrawableWidth="30dp"/>
+```
+Removing inefficient weights and adding a lot more functionalities.
 
 ## Demo
 
 ![Library showcase](https://media.giphy.com/media/xUA7aXqmppLR7a0JfG/giphy.gif)
 
-## Installing
+## Setup
 
-Add this to your dependency
+### 1. Add dependency in build.gradle
 ```compile 'com.matpag:clickdrawabletextview:0.6.0'```
 
-To let the library work correctly, the first thing you need to call is
-```CsDrawableSettings.init(Context context, String packageName)```
+### 2. Use a support theme
+Use one of the theme from ```Theme.AppCompat.*``` for your application theme.
+
+### 3. Initialize library in custom ```Application```
+Call ```CsDrawableSettings.init(Context context, String packageName)``` in the ```onCreate``` of your custom ```Application``` class. In this way:
+```java
+public class AppApplication extends Application {
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        //Init the library
+        CsDrawableSettings.init(this, BuildConfig.APPLICATION_ID);
+    }
+}
+```
+then you need to change your ```AndroidManifest.xml``` to load your custom
+application class instead of the default one adding the
+```android:name".AppApplication"``` (you should update the path accordingly based
+on where you create the ```AppApplication``` class) to the manifest if you already didn't.
+
+Something similar to this:
+```
+<application
+        android:name=".AppApplication"
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:supportsRtl="true"
+        ....>
+
+        <!-- Other declarations -->
+
+</application>
+```
 
 I suggest you to init the library at the end of ```onCreate()``` method of your
  custom ```Application``` class,
 If you dont have a custom ```Application``` class, you can create one like this:
+
 
 ```java
 public class AppApplication extends Application {
