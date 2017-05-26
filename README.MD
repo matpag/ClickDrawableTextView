@@ -159,19 +159,21 @@ Use this XML as example
 ```
 Get the reference in code as usual
 
-```ClickDrawableEditText mCdEditText = (ClickDrawableEditText)findViewById(R.id.click_drawable_edit_text);```
+```java
+ClickDrawableEditText mCdEditText = (ClickDrawableEditText)findViewById(R.id.click_drawable_edit_text);
+```
 
 Create a ```CsDrawable``` object using the builder class
 
-```
+```java
 CsDrawable csDrawable = new CsDrawable.Builder(this, R.drawable.ic_close_red_24dp)
-                .setDrawableDpSize(30, 30) //if you want you can specificy the size in pixel with .setDrawablePixelSize(width, height)
+                .setDrawableDpSize(30, 30) //or .setDrawablePixelSize(width, height) for pixel
                 .setVisibility(false)
                 .build();
 ```
 
-Now you can add the CsDrawable to the view using one (or more) of the following methods
-```
+Now you can add the ```CsDrawable``` to the view using one (or more) of the following methods
+```java
 mCdEditText.addStartCsDrawable(csDrawable);
 mCdEditText.addTopCsDrawable(csDrawable);
 mCdEditText.addEndCsDrawable(csDrawable);
@@ -179,7 +181,7 @@ mCdEditText.addBottomCsDrawable(csDrawable);
 ```
 
 To change the visibility later, you can use
-```
+```java
 mCdEditText.showStartCsDrawable(true | false);
 mCdEditText.showTopCsDrawable(true | false);
 mCdEditText.showEndCsDrawable(true | false);
@@ -187,10 +189,13 @@ mCdEditText.showBottomCsDrawable(true | false);
 ```
 
 ## Listen to Drawables click events
-Now that you have configured your ```ClickDrawable*``` view. You can add a listener for the drawable clicked using ```viewInstance.setOnDrawableClickListener(OnDrawableClickListener listener)```.
+Now that you have configured your ```ClickDrawable*``` view. You can add a listener for the drawable clicked using 
+```java
+viewInstance.setOnDrawableClickListener(OnDrawableClickListener listener)
+```.
 
 Example:
-```
+```java
 viewInstance.setOnDrawableClickListener(new OnDrawableClickListener() {
             @Override
             public void onClick(View view, DrawablePosition position) {
@@ -199,7 +204,7 @@ viewInstance.setOnDrawableClickListener(new OnDrawableClickListener() {
         });
 ```
 If you added more than 1 drawable to the view, you can create a switch case to distinguish between them
-```
+```java
 viewInstance.setOnDrawableClickListener(new OnDrawableClickListener() {
             @Override
             public void onClick(View view, DrawablePosition position) {
@@ -212,18 +217,25 @@ viewInstance.setOnDrawableClickListener(new OnDrawableClickListener() {
 
 ### Advanced features
 If you need to block the user after some action, like after selecting an item in the ```ClickDrawableAutoCompleteTextView``` dropdown.
-You can block the view from receiving the focus for editing *(without disabling the view using ```setEnabled(false)```, because this prevent the dispatch of every events on all the surface view)* using ```viewInstance.disableFocusOnText(boolean preventReFocus, boolean closeKeyboard)```.
+You can block the view from receiving the focus for editing *(without disabling the view using ```setEnabled(false)```, because this prevent the dispatch of every events on all the surface view)* using 
+```viewInstance.disableFocusOnText(boolean preventReFocus, boolean closeKeyboard)```.
 
 ```preventReFocus``` : Passing ```true```, will prevent re-focus on another EditText in the same ViewGroup (if present)
 ```closeKeyboard``` : Passing ```true```, will close the keyboard (if actually open)
 
-Then if the user press the cancel icon, you should re-enable the editing on the view to let him pick another choice using ```viewInstance.enableFocusOnText(boolean openKeyboard);```
+Then if the user press the cancel icon, you should re-enable the editing on the view to let him pick another choice using 
+```viewInstance.enableFocusOnText(boolean openKeyboard);```
 
 ```openKeyboard``` : Passing ```true```, will open the keyboard automatically (if actually closed)
 
 ## Author
 
-**Mattia Pagini** [PROFILE](https://github.com/matpag)
+* **[Mattia Pagini](https://github.com/matpag)** 
+
+## Contributing
+
+Please open issue for bug fixes or feature requests and send pull request after discussing in the issue (to prevent waste of your time on something that can't be merged)
+If you find typos somewhere or a lack of documentation, feel free to create a pull request.
 
 ## License
 
