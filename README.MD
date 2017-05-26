@@ -190,16 +190,15 @@ mCdEditText.showBottomCsDrawable(true | false);
 
 ## Listen to Drawables click events
 Now that you have configured your ```ClickDrawable*``` view. You can add a listener for the drawable clicked using 
-```java
-viewInstance.setOnDrawableClickListener(OnDrawableClickListener listener)
-```.
+```viewInstance.setOnDrawableClickListener(OnDrawableClickListener listener)```.
 
 Example:
 ```java
 viewInstance.setOnDrawableClickListener(new OnDrawableClickListener() {
             @Override
             public void onClick(View view, DrawablePosition position) {
-                Toast.makeText(context, "Touched " + positiong.name() + " drawable", Toast.LENGHT_SHORT).show();
+                Toast.makeText(context, "Touched " + position.name() + " drawable",
+                        Toast.LENGHT_SHORT).show();
             }
         });
 ```
@@ -234,7 +233,7 @@ Then if the user press the cancel icon, you should re-enable the editing on the 
 
 ## Contributing
 
-Please open issue for bug fixes or feature requests and send pull request after discussing in the issue (to prevent waste of your time on something that can't be merged)
+Please open issues for bug fixes or feature requests and send pull request only after discussion in the related issue (to prevent waste of your time on something that can't be merged).
 If you find typos somewhere or a lack of documentation, feel free to create a pull request.
 
 ## License
