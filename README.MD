@@ -1,18 +1,19 @@
-## ClickDrawable - TextView/EditText/AutoComplete
+# ClickDrawable - TextView/EditText/AutoComplete
 
 This library add the ability to listen for drawable click events for TextView, EditText and AutoCompleteTextView normally added in XML
 with ```android:drawableStart``` etc... or in code with ```setCompoundDrawables(...)``` and similar.
-With this library you can flat a layout using every Widget and an ```ImageView``` or ```ImageButton``` on one side to listen for click on the image to one unique view.
+Also with this library you can flat a layout used to side any widget with an ```ImageView``` or ```ImageButton``` added to listen for click on the icon, to one unique custom view.
 
 For example converting this XML:
 ```
 <LinearLayout 
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:orientation="horizontal">
     <TextView
             android:layout_width="0dp"
             android:layout_weight="1"
+            android:layout_gravity="center_vertical"
             android:layout_height="wrap_content"
             android:text="this textview looks nice"/>
     <ImageView
@@ -32,13 +33,16 @@ Into this:
         app:csStartDrawableHeight="30dp"
         app:csStartDrawableWidth="30dp"/>
 ```
-Removing inefficient weights and adding a lot more functionalities.
+Removing a ViewGroup, removing inefficient weights and adding a lot more functionalities.
 
 ## Demo
+This GIF shows a ```ClickDrawableEditText``` with clickable drawables all around it (please never do this in a real app, it's really unpleasant :D) and a ```ClickDrawableAutoCompleteTextView``` with support for blocking inputs after user choice, until cancel icon is pressed.
 
 ![Library showcase](https://media.giphy.com/media/xUA7aXqmppLR7a0JfG/giphy.gif)
 
 ## Setup
+
+This library is minSdk 17 because of [this](https://developer.android.com/reference/android/content/res/Configuration.html#SCREENLAYOUT_LAYOUTDIR_RTL) flag we need to know if the app is running in RTL mode or not.
 
 ### 1. Add dependency in build.gradle
 ```compile 'com.matpag:clickdrawabletextview:0.6.0'```
@@ -47,7 +51,8 @@ Removing inefficient weights and adding a lot more functionalities.
 Use one of the theme from ```Theme.AppCompat.*``` for your application theme.
 
 ### 3. Initialize library in custom ```Application```
-Call ```CsDrawableSettings.init(Context context, String packageName)``` in the ```onCreate``` of your custom ```Application``` class. In this way:
+Call ```CsDrawableSettings.init(Context context, String packageName)``` in the ```onCreate``` of your custom ```Application``` class. 
+In this way:
 ```java
 public class AppApplication extends Application {
     @Override
@@ -77,59 +82,22 @@ Something similar to this:
 </application>
 ```
 
-I suggest you to init the library at the end of ```onCreate()``` method of your
- custom ```Application``` class,
-If you dont have a custom ```Application``` class, you can create one like this:
-
-
-```java
-public class AppApplication extends Application {
-    @Override
-    public void onCreate() {
-        super.onCreate();
-        //Init the library
-        CsDrawableSettings.init(this, BuildConfig.APPLICATION_ID);
-    }
-}
-```
-then you need to change your ```AndroidManifest.xml``` to load your custom
-application class instead of the default one adding the
-```android:name".AppApplication"``` (you should update the path accordingly based
-on where you create the ```AppApplication``` class) to the manifest.
-
-Something similar to this:
-```
-<application
-        android:name=".AppApplication"
-        android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
-        android:supportsRtl="true"
-        ....>
-
-        <!-- Other declarations -->
-
-</application>
-```
-
+### 4. RTL support
+If you want to support RTL, you simply need to add ```android:supportsRtl="true"``` to the *application* tag in your ```AndroidManifest.xml``` and the library will handle everything for you.
 
 ## Docs
 
-The library provides 3 views with extended functionalities for drawables.
+The library provides 3 custom views with extended functionalities for drawables.
 
-Those are:
+#### ```ClickDrawableTextView```
+#### ```ClickDrawableEditText```
+#### ```ClickDrawableAutoCompleteTextView```
 
-```ClickDrawableTextView```
-
-```ClickDrawableEditText```
-
-```ClickDrawableAutoCompleteTextView```
-
-Each of them it's extending the ```AppCompat``` counterpart for max compatibility with every SDK version.
+Each of them it's extending the ```AppCompat``` counterpart class for max compatibility with every supported SDK version
 
 The custom drawables are ```CsDrawable```s objects.
 
-You can add a ```CsDrawable``` via XML or via Code,
-below you can find both the implementations
+You can add a ```CsDrawable``` via XML or via Code, below you can find both the implementations.
 
 #### XML
 After declaring
@@ -146,14 +114,11 @@ app:csEndDrawable
 app:csTopDrawable
 app:csBottomDrawable
 ```
-providing a reference to a drawable of any type.
+providing a reference to a drawable of any type (png, xml drawable, vector drawable)
 
-If you don't specify any size for the drawable, automatically the drawable will be sized
-to the width and height of the drawable itself (called **intrinsic** in the android
-platform).
+If you don't specify any size for the drawable, automatically the drawable will be sized to the width and height of the drawable itself (called **intrinsic** in the android platform).
 
-If you dont want to resize your original drawable resource, i suggest you to
-add the width and the height you need for the drawable/s you added using respectively:
+If you dont want to resize your original drawable resource (and you really shouldn't if not necessary), i suggest you to specify the width and the height in **dp** you need using:
 ```
 app:csStartDrawableHeight
 app:csStartDrawableWidth
@@ -184,14 +149,9 @@ app:csBottomDrawableVisible
 ```
 with ```true```(default) or ```false``` value
 
-Don't forget to enable the RTL support in your ```AndroidManifest.xml``` adding
-```android:supportsRtl="true"``` to the *application* tag if you care about RTL.
-
 #### Code
 
-You need to create or reference one of the library ```TextView``` subclasses.
-
-You can have this XML
+Use this XML as example
 ```
 <com.matpag.clickdrawabletextview.ClickDrawableEditText
         android:id="@+id/click_drawable_edit_text"
@@ -212,12 +172,11 @@ CsDrawable csDrawable = new CsDrawable.Builder(this, R.drawable.ic_close_red_24d
 ```
 
 Add the CsDrawable to the view with one of the following methods
-```mCdEditText.addEndCsDrawable(csDrawable);
+```mCdEditText.addStartCsDrawable(csDrawable);```
 
 ## Author
 
 * **Mattia Pagini**
-See also the list of [contributors](https://github.com/matpag/ClickDrawableTextView/contributors) who participated in this project.
 
 ## License
 
