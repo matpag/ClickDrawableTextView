@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         mCdAutoComplete.addEndCsDrawable(csDrawable1);
 
         //add a list of random strings to the autocompletetextview
-        String[] strings = new String[]{"Dog", "Cat", "Mouse", "Bird", "Bee", "Cow", "Parrot", "Snake"};
+        String[] strings = new String[]{"Ant", "Dog", "Cat", "Mouse", "Bird", "Bee", "Cow", "Parrot", "Snake", "Tiger"};
         ArrayAdapter<String> adapter = new ArrayAdapter<>(this, android.R.layout.simple_list_item_1, strings);
         mCdAutoComplete.setAdapter(adapter);
 

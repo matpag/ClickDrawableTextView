@@ -48,6 +48,7 @@
         android:textColor="@android:color/darker_gray"/>
 
     <com.matpag.clickdrawabletextview.ClickDrawableAutoCompleteTextView
+        android:hint="Type an animal name"
         android:id="@+id/click_drawable_auto_text_view"
         android:layout_width="match_parent"
         android:padding="20dp"
