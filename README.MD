@@ -189,35 +189,37 @@ mCdEditText.showBottomCsDrawable(true | false);
 ```
 
 ## Listen to Drawables click events
-Now that you have configured your ```ClickDrawable*``` view. You can add a listener for the drawable clicked using 
+Now that you have configured your ```ClickDrawable*``` view with one or more drawables. You can add a listener to the drawable(s) click events.
 ```viewInstance.setOnDrawableClickListener(OnDrawableClickListener listener)```.
 
 Example:
 ```java
 viewInstance.setOnDrawableClickListener(new OnDrawableClickListener() {
-            @Override
-            public void onClick(View view, DrawablePosition position) {
-                Toast.makeText(context, "Touched " + position.name() + " drawable",
-                        Toast.LENGHT_SHORT).show();
-            }
-        });
+    @Override
+    public void onClick(View view, DrawablePosition position) {
+        Toast.makeText(context, "Touched " + position.name() + " drawable",
+                Toast.LENGHT_SHORT).show();
+    }
+});
 ```
 If you added more than 1 drawable to the view, you can create a switch case to distinguish between them
 ```java
 viewInstance.setOnDrawableClickListener(new OnDrawableClickListener() {
-            @Override
-            public void onClick(View view, DrawablePosition position) {
-                switch (position){
-                    case START: startDrawableClicked(); break;
-                    case END: endDrawableClicked(); break;
-            }
-        });
+    @Override
+    public void onClick(View view, DrawablePosition position) {
+        switch (position){
+            case START: startDrawableClicked(); break;
+            case END: endDrawableClicked(); break;
+    }
+});
 ```
 
 ### Advanced features
-If you need to block the user after some action, like after selecting an item in the ```ClickDrawableAutoCompleteTextView``` dropdown.
-You can block the view from receiving the focus for editing *(without disabling the view using ```setEnabled(false)```, because this prevent the dispatch of every events on all the surface view)* using 
-```viewInstance.disableFocusOnText(boolean preventReFocus, boolean closeKeyboard)```.
+If you need to block the user after some action, for example after selecting an item in the ```ClickDrawableAutoCompleteTextView``` dropdown.
+You can prevent the view from receiving the focus for editing with 
+```viewInstance.disableFocusOnText(boolean preventReFocus, boolean closeKeyboard)``` 
+
+(Don't use *```setEnabled(false)```*, because this prevent the dispatch of all touch events).
 
 ```preventReFocus``` : Passing ```true```, will prevent re-focus on another EditText in the same ViewGroup (if present)
 ```closeKeyboard``` : Passing ```true```, will close the keyboard (if actually open)
@@ -226,6 +228,8 @@ Then if the user press the cancel icon, you should re-enable the editing on the 
 ```viewInstance.enableFocusOnText(boolean openKeyboard);```
 
 ```openKeyboard``` : Passing ```true```, will open the keyboard automatically (if actually closed)
+
+You can find a concrete example of this use case in the app module of the repository, in the [MainActivity](https://github.com/matpag/ClickDrawableTextView/blob/master/app/src/main/java/com/matpag/sample/MainActivity.java)
 
 ## Author
 
