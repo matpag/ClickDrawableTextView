@@ -42,7 +42,7 @@ This GIF shows a ```ClickDrawableEditText``` with clickable drawables all around
 
 ## Setup
 
-This library is minSdk 17 because of [this](https://developer.android.com/reference/android/content/res/Configuration.html#SCREENLAYOUT_LAYOUTDIR_RTL) flag we need to know if the app is running in RTL mode or not.
+This library is minSdk 16
 
 ### 1. Add dependency in build.gradle
 ```compile 'com.matpag:clickdrawabletextview:0.6.0'```
@@ -83,6 +83,8 @@ Something similar to this:
 ```
 
 ### 4. RTL support
+(Enabled only on API 17+ because the support for RTL was added in [API 17](https://developer.android.com/about/versions/android-4.2.html#RTL), lower API level will have the default layout direction to LTR)
+
 If you want to support RTL, you simply need to add ```android:supportsRtl="true"``` to the *application* tag in your ```AndroidManifest.xml``` and the library will handle everything for you.
 
 ## Docs
