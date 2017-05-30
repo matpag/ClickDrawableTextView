@@ -81,11 +81,9 @@ public interface ClickableDrawable {
     void removeAllCsDrawables();
 
     /**
-     * <p>
-     *     Disable focus on the view, simulating a {@link android.view.View#setEnabled(boolean)}
-     *     call with a <code>false</code> parameter. In this way we can still handle the touch
-     *     inputs on the {@link CsDrawable}/s attached.
-     * </p>
+     * Disable focus on the view, simulating a {@link android.view.View#setEnabled(boolean)}
+     * call with a <code>false</code> parameter. In this way we can still handle the touch
+     * inputs on the {@link CsDrawable}/s attached.
      * @param preventReFocus <code>true</code> if the focus leaving the current view should
      *                       not fall on another view inside the parent view. <code>false</code>
      *                       for default behaviour.
@@ -95,10 +93,8 @@ public interface ClickableDrawable {
     void disableFocusOnText(boolean preventReFocus, boolean closeKeyboard);
 
     /**
-     * <p>
-     *     Re-enable the focus on the view, canceling a previous call to
-     *     {@link #disableFocusOnText(boolean, boolean)} method.
-     * </p>
+     * Re-enable the focus on the view, canceling a previous call to
+     * {@link #disableFocusOnText(boolean, boolean)} method.
      * @param openKeyboard <code>true</code> if the keyboard should be opened if closed when this
      *                     method is called
      */
