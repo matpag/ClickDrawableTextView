@@ -1,10 +1,12 @@
 package com.matpag.clickdrawabletextview;
 
 import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
 import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -174,8 +176,12 @@ final class CsDrawableViewManager implements ClickableDrawable {
      * @return true if in RTL, false otherwise
      */
     private boolean isLayoutRTL(){
-        return CsDrawableSettings.isRtlSupportEnabled() &&
-                mConfig.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1) {
+            return CsDrawableSettings.isRtlSupportEnabled() &&
+                    mConfig.getLayoutDirection() == View.LAYOUT_DIRECTION_RTL;
+        } else {
+            return CsDrawableSettings.isRtlSupportEnabled();
+        }
     }
 
     /**
@@ -206,6 +212,7 @@ final class CsDrawableViewManager implements ClickableDrawable {
      * Add the compound drawables to the view, if the Locale of the user is in
      * RTL mode the drawables will be added in the proper position
      */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     private void addCompoundDrawablesRelative(){
         view.setCompoundDrawablesRelative(
                 mStartDrawable != null ? mStartDrawable.getDrawableIfVisible() : null,

@@ -3,6 +3,7 @@ package com.matpag.clickdrawabletextview;
 import android.content.Context;
 import android.content.pm.ApplicationInfo;
 import android.content.pm.PackageManager;
+import android.os.Build;
 
 /**
  * Global configuration to handle correctly some user specific choices
@@ -29,16 +30,22 @@ public class CsDrawableSettings {
      *                    be the proper choice in the most cases
      */
     public static void init(Context context, String packageName){
-        PackageManager pManager = context.getApplicationContext().getPackageManager();
-        try {
-            ApplicationInfo appInfo = pManager.getApplicationInfo(packageName, 0);
-            //read the Application android:supportsRtl xml properties (if present), default false
-            boolean rtlSupport = (appInfo.flags & ApplicationInfo.FLAG_SUPPORTS_RTL) != 0;
-            mSettings = new CsDrawableSettings(rtlSupport);
-        } catch (PackageManager.NameNotFoundException nfe){
-            throw new IllegalArgumentException("Unable to get info for the provided packageName, " +
-                    "are you sure is it correct? BuildConfig.APPLICATION_ID should be fine " +
-                    "for the most cases");
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
+            PackageManager pManager = context.getApplicationContext().getPackageManager();
+            try {
+                ApplicationInfo appInfo = pManager.getApplicationInfo(packageName, 0);
+                //read the Application android:supportsRtl xml properties (if present), default false
+                boolean rtlSupport = (appInfo.flags & ApplicationInfo.FLAG_SUPPORTS_RTL) != 0;
+                mSettings = new CsDrawableSettings(rtlSupport);
+            } catch (PackageManager.NameNotFoundException nfe){
+                throw new IllegalArgumentException("Unable to get info for the provided " +
+                        "packageName, are you sure is it correct? BuildConfig.APPLICATION_ID " +
+                        "should be fine in most cases");
+            }
+        } else {
+            //prior to API 17 RTL is not supported, so we create settings instance
+            //with default false support for RTL
+            mSettings = new CsDrawableSettings(false);
         }
     }
 
