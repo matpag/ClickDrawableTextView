@@ -149,6 +149,7 @@ app:csEndDrawableVisible"true | false"
 app:csTopDrawableVisible"true | false"
 app:csBottomDrawableVisible"true | false"
 ```
+(default is true)
 
 #### Code
 
@@ -170,7 +171,7 @@ Create a ```CsDrawable``` object using the builder class
 ```java
 CsDrawable csDrawable = new CsDrawable.Builder(this, R.drawable.ic_close_red_24dp)
                 .setDrawableDpSize(30, 30) //or .setDrawablePixelSize(width, height) for pixel
-                .setVisibility(false)
+                .setVisibility(false) //optional, default true
                 .build();
 ```
 
@@ -212,6 +213,7 @@ viewInstance.setOnDrawableClickListener(new OnDrawableClickListener() {
         switch (position){
             case START: startDrawableClicked(); break;
             case END: endDrawableClicked(); break;
+        }
     }
 });
 ```
