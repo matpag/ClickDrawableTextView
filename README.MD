@@ -29,9 +29,9 @@ Into this:
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="this textview looks nice"
-        app:csStartDrawable="@drawable/my_icon
-        app:csStartDrawableHeight="30dp"
-        app:csStartDrawableWidth="30dp"/>
+        app:csEndDrawable="@drawable/my_icon
+        app:csEndDrawableHeight="30dp"
+        app:csEndDrawableWidth="30dp"/>
 ```
 Removing a ViewGroup, removing inefficient weights and adding a lot more functionalities.
 
