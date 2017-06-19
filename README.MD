@@ -15,12 +15,11 @@ For example converting this XML:
             android:layout_weight="1"
             android:layout_gravity="center_vertical"
             android:layout_height="wrap_content"
-            android:text="this textview looks nice"/>
+            android:text="this textview looks nice" />
     <ImageView
             android:layout_width="30dp"
             android:layout_height="30dp"
-            app:srcCompat="@drawable/my_icon
-            android:text="this textview looks nice"/>
+            app:srcCompat="@drawable/my_icon" />
 </LinearLayout> 
 ```
 Into this:
