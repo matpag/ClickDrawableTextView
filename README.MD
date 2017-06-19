@@ -28,7 +28,7 @@ Into this:
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="this textview looks nice"
-        app:csEndDrawable="@drawable/my_icon
+        app:csEndDrawable="@drawable/my_icon"
         app:csEndDrawableHeight="30dp"
         app:csEndDrawableWidth="30dp"/>
 ```
