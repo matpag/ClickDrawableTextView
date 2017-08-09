@@ -64,8 +64,8 @@ public class AppApplication extends Application {
 ```
 then you need to change your ```AndroidManifest.xml``` to load your custom
 application class instead of the default one adding the
-```android:name".AppApplication"``` (you should update the path accordingly based
-on where you create the ```AppApplication``` class) to the manifest if you already didn't.
+```android:name".AppApplication"``` (you should update the path accordingly based on
+where you created the ```AppApplication``` class) to the manifest if you already didn't.
 
 Something similar to this:
 ```
