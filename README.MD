@@ -225,6 +225,7 @@ You can prevent the view from receiving the focus for editing with
 (Don't use *```setEnabled(false)```*, because this prevent the dispatch of all touch events).
 
 ```preventReFocus``` : Passing ```true```, will prevent re-focus on another EditText in the same ViewGroup (if present)
+
 ```closeKeyboard``` : Passing ```true```, will close the keyboard (if actually open)
 
 Then if the user press the cancel icon, you should re-enable the editing on the view to let him pick another choice using 
