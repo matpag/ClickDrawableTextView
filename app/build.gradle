@@ -23,9 +23,9 @@ android {
 }
 
 dependencies {
-    compile "com.android.support:appcompat-v7:${versions.supportLib}"
+    implementation "com.android.support:appcompat-v7:${versions.supportLib}"
 
-    compile project(':library')
+    implementation project(':library')
 }
 
 configurations.all {
