@@ -1,3 +1,6 @@
+### v2.0.2 - 11/05/2017
+ - Removed unused string
+##
 ### v2.0.1 - 11/05/2017
  - Small optimization to ```CsDrawableSettings.init(...)``` method
 ##
