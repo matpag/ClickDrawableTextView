@@ -22,7 +22,7 @@ public class CsDrawableSettings {
 
     /**
      * Init method to call before every custom view initialization, this should preferably be
-     * called in the custom {@link android.app.Application} app class. But you can use is in the
+     * called in the custom {@link android.app.Application} app class. But you can use it in the
      * activity too before calling {@link android.app.Activity#setContentView(int)} or calling
      * this per Activity if you need to support RTL in some activities and not in others
      * @param context the app context
@@ -30,23 +30,22 @@ public class CsDrawableSettings {
      *                    be the proper choice in the most cases
      */
     public static void init(Context context, String packageName){
+        // prior to API 17 RTL is not supported, so we create settings instance with default support
+        // for RTL set to false
+        boolean rtlSupport = false;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR1){
             PackageManager pManager = context.getApplicationContext().getPackageManager();
             try {
                 ApplicationInfo appInfo = pManager.getApplicationInfo(packageName, 0);
-                //read the Application android:supportsRtl xml properties (if present), default false
-                boolean rtlSupport = (appInfo.flags & ApplicationInfo.FLAG_SUPPORTS_RTL) != 0;
-                mSettings = new CsDrawableSettings(rtlSupport);
+                //read the Application android:supportsRtl xml properties (if present)
+                rtlSupport = (appInfo.flags & ApplicationInfo.FLAG_SUPPORTS_RTL) != 0;
             } catch (PackageManager.NameNotFoundException nfe){
                 throw new IllegalArgumentException("Unable to get info for the provided " +
                         "packageName, are you sure is it correct? BuildConfig.APPLICATION_ID " +
                         "should be fine in most cases");
             }
-        } else {
-            //prior to API 17 RTL is not supported, so we create settings instance
-            //with default false support for RTL
-            mSettings = new CsDrawableSettings(false);
         }
+        mSettings = new CsDrawableSettings(rtlSupport);
     }
 
     /**
