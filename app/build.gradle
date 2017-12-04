@@ -31,7 +31,3 @@ dependencies {
 
     implementation project(':library')
 }
-
-configurations.all {
-    resolutionStrategy.force "com.android.support:appcompat-v7:${versions.supportLib}"
-}
