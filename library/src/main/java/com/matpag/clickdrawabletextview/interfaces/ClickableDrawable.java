@@ -1,5 +1,7 @@
 package com.matpag.clickdrawabletextview.interfaces;
 
+import android.support.annotation.ColorRes;
+
 import com.matpag.clickdrawabletextview.CsDrawable;
 
 /**

@@ -3,10 +3,13 @@ package com.matpag.clickdrawabletextview;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.ColorStateList;
 import android.content.res.Configuration;
 import android.content.res.TypedArray;
+import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -34,6 +37,7 @@ final class CsDrawableViewManager implements ClickableDrawable {
 
     private Context mContext;
 
+    //the 4 drawables a view can setup around itself
     private CsDrawable mStartDrawable;
     private CsDrawable mTopDrawable;
     private CsDrawable mEndDrawable;
@@ -90,10 +94,10 @@ final class CsDrawableViewManager implements ClickableDrawable {
 
             mMetrics = context.getResources().getDisplayMetrics();
 
-            Drawable leftDrawable = a.getDrawable(
+            Drawable startDrawable = a.getDrawable(
                     R.styleable.CsDrawableViewManager_csStartDrawable);
-            if (leftDrawable != null) {
-                mStartDrawable = new CsDrawable(context, leftDrawable);
+            if (startDrawable != null) {
+                mStartDrawable = new CsDrawable(context, startDrawable);
                 int height = a.getDimensionPixelSize(
                         R.styleable.CsDrawableViewManager_csStartDrawableHeight, -1);
                 int width = a.getDimensionPixelSize(
@@ -104,6 +108,17 @@ final class CsDrawableViewManager implements ClickableDrawable {
                 boolean visibility = a.getBoolean(
                         R.styleable.CsDrawableViewManager_csStartDrawableVisible, true);
                 mStartDrawable.setVisibility(visibility);
+                //handle tint and tintMode
+                ColorStateList tintColor = a.getColorStateList(
+                        R.styleable.CsDrawableViewManager_csStartDrawableTint);
+                if (tintColor != null){
+                    DrawableCompat.setTintList(mEndDrawable.getDrawable(), tintColor);
+                }
+                PorterDuff.Mode tintMode = parseTintMode(a.getInt(
+                        R.styleable.CsDrawableViewManager_csStartDrawableTintMode, -1));
+                if (tintMode != null){
+                    DrawableCompat.setTintMode(mEndDrawable.getDrawable(), tintMode);
+                }
             }
 
             Drawable topDrawable = a.getDrawable(
@@ -120,12 +135,23 @@ final class CsDrawableViewManager implements ClickableDrawable {
                 boolean visibility = a.getBoolean(
                         R.styleable.CsDrawableViewManager_csTopDrawableVisible, true);
                 mTopDrawable.setVisibility(visibility);
+                //handle tint and tintMode
+                ColorStateList tintColor = a.getColorStateList(
+                        R.styleable.CsDrawableViewManager_csTopDrawableTint);
+                if (tintColor != null){
+                    DrawableCompat.setTintList(mEndDrawable.getDrawable(), tintColor);
+                }
+                PorterDuff.Mode tintMode = parseTintMode(a.getInt(
+                        R.styleable.CsDrawableViewManager_csTopDrawableTintMode, -1));
+                if (tintMode != null){
+                    DrawableCompat.setTintMode(mEndDrawable.getDrawable(), tintMode);
+                }
             }
 
-            Drawable rightDrawable = a.getDrawable(
+            Drawable endDrawable = a.getDrawable(
                     R.styleable.CsDrawableViewManager_csEndDrawable);
-            if (rightDrawable != null) {
-                mEndDrawable = new CsDrawable(context, rightDrawable);
+            if (endDrawable != null) {
+                mEndDrawable = new CsDrawable(context, endDrawable);
                 int height = a.getDimensionPixelSize(
                         R.styleable.CsDrawableViewManager_csEndDrawableHeight, -1);
                 int width = a.getDimensionPixelSize(
@@ -136,6 +162,17 @@ final class CsDrawableViewManager implements ClickableDrawable {
                 boolean visibility = a.getBoolean(
                         R.styleable.CsDrawableViewManager_csEndDrawableVisible, true);
                 mEndDrawable.setVisibility(visibility);
+                //handle tint and tintMode
+                ColorStateList tintColor = a.getColorStateList(
+                        R.styleable.CsDrawableViewManager_csEndDrawableTint);
+                if (tintColor != null){
+                    DrawableCompat.setTintList(mEndDrawable.getDrawable(), tintColor);
+                }
+                PorterDuff.Mode tintMode = parseTintMode(a.getInt(
+                        R.styleable.CsDrawableViewManager_csEndDrawableTintMode, -1));
+                if (tintMode != null){
+                    DrawableCompat.setTintMode(mEndDrawable.getDrawable(), tintMode);
+                }
             }
 
             Drawable bottomDrawable = a.getDrawable(
@@ -152,6 +189,17 @@ final class CsDrawableViewManager implements ClickableDrawable {
                 boolean visibility = a.getBoolean(
                         R.styleable.CsDrawableViewManager_csBottomDrawableVisible, true);
                 mBottomDrawable.setVisibility(visibility);
+                //handle tint and tintMode
+                ColorStateList tintColor = a.getColorStateList(
+                        R.styleable.CsDrawableViewManager_csBottomDrawableTint);
+                if (tintColor != null){
+                    DrawableCompat.setTintList(mEndDrawable.getDrawable(), tintColor);
+                }
+                PorterDuff.Mode tintMode = parseTintMode(a.getInt(
+                        R.styleable.CsDrawableViewManager_csBottomDrawableTintMode, -1));
+                if (tintMode != null){
+                    DrawableCompat.setTintMode(mEndDrawable.getDrawable(), tintMode);
+                }
             }
 
             a.recycle();
@@ -227,47 +275,44 @@ final class CsDrawableViewManager implements ClickableDrawable {
      */
     @SuppressLint("ClickableViewAccessibility")
     private void setViewOnTouchListener(){
-        view.setOnTouchListener(new View.OnTouchListener() {
-            @Override
-            public boolean onTouch(View v, MotionEvent e) {
-                switch (e.getAction()) {
-                    case MotionEvent.ACTION_DOWN: {
-                        //if the user clicked on one of the drawables, save some datas about it
-                        if (isOneOfDrawablesTouched(e)) {
-                            pressedX = e.getX();
-                            pressedY = e.getY();
-                            stayedWithinClickDistance = true;
-                            return true;
-                        } else if (!enableTouchOnText){
-                            return true;
-                        }
-                        break;
+        view.setOnTouchListener((v, e) -> {
+            switch (e.getAction()) {
+                case MotionEvent.ACTION_DOWN: {
+                    //if the user clicked on one of the drawables, save some datas about it
+                    if (isOneOfDrawablesTouched(e)) {
+                        pressedX = e.getX();
+                        pressedY = e.getY();
+                        stayedWithinClickDistance = true;
+                        return true;
+                    } else if (!enableTouchOnText){
+                        return true;
                     }
-                    case MotionEvent.ACTION_MOVE: {
-                        //if the user moved the finger to much far from the initial tap point,
-                        //we cancel the touch on the drawable
-                        if (stayedWithinClickDistance && distance(pressedX, pressedY, e.getX(),
-                                        e.getY()) > MAX_CLICK_DISTANCE) {
-                            stayedWithinClickDistance = false;
-                        }
-                        break;
+                    break;
+                }
+                case MotionEvent.ACTION_MOVE: {
+                    //if the user moved the finger to much far from the initial tap point,
+                    //we cancel the touch on the drawable
+                    if (stayedWithinClickDistance && distance(pressedX, pressedY, e.getX(),
+                                    e.getY()) > MAX_CLICK_DISTANCE) {
+                        stayedWithinClickDistance = false;
                     }
-                    case MotionEvent.ACTION_UP: {
-                        long eventDuration = e.getEventTime() - e.getDownTime();
-                        if (mTouchedPosition != null){
-                            if ((eventDuration < MAX_CLICK_DURATION) && stayedWithinClickDistance) {
-                                dispatchDrawableClickEvent();
-                                //dispatch accessibility events (even if the lint checker is still
-                                //complaining about this
-                                view.performClick();
-                            }
-                            resetTouchedDrawable();
-                            return true;
+                    break;
+                }
+                case MotionEvent.ACTION_UP: {
+                    long eventDuration = e.getEventTime() - e.getDownTime();
+                    if (mTouchedPosition != null){
+                        if ((eventDuration < MAX_CLICK_DURATION) && stayedWithinClickDistance) {
+                            dispatchDrawableClickEvent();
+                            //dispatch accessibility events (even if the lint checker is still
+                            //complaining about this)
+                            view.performClick();
                         }
+                        resetTouchedDrawable();
+                        return true;
                     }
                 }
-                return false;
             }
+            return false;
         });
     }
 
@@ -466,6 +511,25 @@ final class CsDrawableViewManager implements ClickableDrawable {
 
     private static float pxToDp(float px) {
         return px / mMetrics.density;
+    }
+
+    /**
+     * Parses a {@link android.graphics.PorterDuff.Mode} from a tintMode
+     * attribute's enum value.
+     *
+     * Copied from the AOSP source in the {@link Drawable} class
+     * <a href="https://android.googlesource.com/platform/frameworks/base/+/c80ad99a33ee49d0bac994c1749ff24d243c3862/graphics/java/android/graphics/drawable/Drawable.java#1230">here</a>
+     */
+    private static PorterDuff.Mode parseTintMode(int value) {
+        switch (value) {
+            case 3: return PorterDuff.Mode.SRC_OVER;
+            case 5: return PorterDuff.Mode.SRC_IN;
+            case 9: return PorterDuff.Mode.SRC_ATOP;
+            case 14: return PorterDuff.Mode.MULTIPLY;
+            case 15: return PorterDuff.Mode.SCREEN;
+            case 16: return PorterDuff.Mode.ADD;
+            default: return null;
+        }
     }
 
 }
