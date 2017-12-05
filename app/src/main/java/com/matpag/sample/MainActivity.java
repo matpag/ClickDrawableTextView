@@ -39,7 +39,7 @@ public class MainActivity extends AppCompatActivity {
             Toast.makeText(MainActivity.this, "Search started...",
                     Toast.LENGTH_SHORT).show();
             //close the keyboard if opened
-            mCdEditText.closeKeyboard();
+            mCdSearchEditText.closeKeyboard();
         });
 
 
