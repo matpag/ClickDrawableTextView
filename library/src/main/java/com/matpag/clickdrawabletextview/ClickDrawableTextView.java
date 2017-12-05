@@ -2,7 +2,6 @@ package com.matpag.clickdrawabletextview;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatTextView;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 
 import com.matpag.clickdrawabletextview.interfaces.ClickableDrawable;

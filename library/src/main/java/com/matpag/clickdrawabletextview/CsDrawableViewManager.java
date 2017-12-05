@@ -436,16 +436,13 @@ final class CsDrawableViewManager implements ClickableDrawable {
             view.clearFocus();
         }
         if (closeKeyboard){
-            //Preserve style if present
-            SpannableStringBuilder currentText = new SpannableStringBuilder(view.getText());
-            currentText.append("");
             if (mViewTextWatcher == null){
-                view.setText(currentText);
+                view.setText(view.getText());
             } else {
                 //workaround a problem with some keyboard implementation like SwiftKey, where they
                 //don't remove the underline from the text even when the keyboard is closed
                 view.removeTextChangedListener(mViewTextWatcher);
-                view.setText(currentText);
+                view.setText(view.getText());
                 view.addTextChangedListener(mViewTextWatcher);
             }
             //hide the keyboard if opened
