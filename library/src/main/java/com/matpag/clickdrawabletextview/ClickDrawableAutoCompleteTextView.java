@@ -2,6 +2,7 @@ package com.matpag.clickdrawabletextview;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatAutoCompleteTextView;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 
 import com.matpag.clickdrawabletextview.interfaces.ClickableDrawable;
@@ -112,5 +113,21 @@ public class ClickDrawableAutoCompleteTextView extends AppCompatAutoCompleteText
     @Override
     public void closeKeyboard() {
         mCsDrawableViewManager.closeKeyboard();
+    }
+
+    @Override
+    public void addTextChangedListener(TextWatcher watcher) {
+        super.addTextChangedListener(watcher);
+        if (mCsDrawableViewManager != null){
+            mCsDrawableViewManager.addTextWatcher(watcher);
+        }
+    }
+
+    @Override
+    public void removeTextChangedListener(TextWatcher watcher) {
+        super.removeTextChangedListener(watcher);
+        if (mCsDrawableViewManager != null){
+            mCsDrawableViewManager.removeTextWatcher();
+        }
     }
 }

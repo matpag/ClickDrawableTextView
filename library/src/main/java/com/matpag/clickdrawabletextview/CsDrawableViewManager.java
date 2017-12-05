@@ -10,6 +10,8 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.graphics.drawable.DrawableCompat;
+import android.text.SpannableStringBuilder;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.MotionEvent;
@@ -51,6 +53,8 @@ final class CsDrawableViewManager implements ClickableDrawable {
     private boolean enableTouchOnText = true;
 
     private Configuration mConfig;
+
+    private TextWatcher mViewTextWatcher;
 
     /**
      * Max allowed duration for a "click", in milliseconds.
@@ -432,6 +436,18 @@ final class CsDrawableViewManager implements ClickableDrawable {
             view.clearFocus();
         }
         if (closeKeyboard){
+            //Preserve style if present
+            SpannableStringBuilder currentText = new SpannableStringBuilder(view.getText());
+            currentText.append("");
+            if (mViewTextWatcher == null){
+                view.setText(currentText);
+            } else {
+                //workaround a problem with some keyboard implementation like SwiftKey, where they
+                //don't remove the underline from the text even when the keyboard is closed
+                view.removeTextChangedListener(mViewTextWatcher);
+                view.setText(currentText);
+                view.addTextChangedListener(mViewTextWatcher);
+            }
             //hide the keyboard if opened
             setImeVisibility(false);
         }
@@ -457,6 +473,15 @@ final class CsDrawableViewManager implements ClickableDrawable {
         setImeVisibility(false);
     }
 
+
+    void addTextWatcher(TextWatcher textWatcher){
+        mViewTextWatcher = textWatcher;
+    }
+
+    void removeTextWatcher(){
+        mViewTextWatcher = null;
+    }
+
     /**
      * Open the keyboard with some Google trick
      * <a href="http://stackoverflow.com/a/13306632/2910520">Link here</a>
@@ -469,7 +494,6 @@ final class CsDrawableViewManager implements ClickableDrawable {
             view.removeCallbacks(mShowImeRunnable);
             InputMethodManager imm = (InputMethodManager) mContext
                     .getSystemService(Context.INPUT_METHOD_SERVICE);
-
             if (imm != null) {
                 imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
             }
@@ -480,7 +504,6 @@ final class CsDrawableViewManager implements ClickableDrawable {
         public void run() {
             InputMethodManager imm = (InputMethodManager) mContext
                     .getSystemService(Context.INPUT_METHOD_SERVICE);
-
             if (imm != null) {
                 imm.showSoftInput(view, 0);
             }

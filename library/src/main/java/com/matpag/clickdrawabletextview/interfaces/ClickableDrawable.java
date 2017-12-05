@@ -1,7 +1,5 @@
 package com.matpag.clickdrawabletextview.interfaces;
 
-import android.support.annotation.ColorRes;
-
 import com.matpag.clickdrawabletextview.CsDrawable;
 
 /**
@@ -103,7 +101,12 @@ public interface ClickableDrawable {
     void enableFocusOnText(boolean openKeyboard);
 
     /**
-     * Helper method to close the keyboard if the IME is currently opened
+     * Helper method to close the keyboard if the IME is currently opened.
+     * <br/><br/>
+     * WARNING<br/>
+     * This is a small utility which aims to provide a basic functionality which depends a lot
+     * on the keyboard application the user it's using, your view and inputMethod settings.
+     * So if this method is not working you probably need to provide your custom implementation.
      */
     void closeKeyboard();
 
