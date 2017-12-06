@@ -17,7 +17,7 @@ buildscript {
     // project and then reference this from the modules
     ext {
         setup = [compileSdk: 27,
-                 buildTools: "27.0.1",
+                 buildTools: "27.0.2",
                  minSdk    : 16,
                  targetSdk : 27]
 
