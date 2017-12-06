@@ -440,7 +440,7 @@ final class CsDrawableViewManager implements ClickableDrawable {
                 view.setText(view.getText());
             } else {
                 //workaround a problem with some keyboard implementation like SwiftKey, where they
-                //don't remove the underline from the text even when the keyboard is closed
+                //don't remove the underline from ext even when the keyboard is closed
                 view.removeTextChangedListener(mViewTextWatcher);
                 view.setText(view.getText());
                 view.addTextChangedListener(mViewTextWatcher);

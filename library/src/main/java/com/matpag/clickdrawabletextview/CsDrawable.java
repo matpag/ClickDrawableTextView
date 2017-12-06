@@ -1,15 +1,11 @@
 package com.matpag.clickdrawabletextview;
 
 import android.content.Context;
-import android.content.res.ColorStateList;
-import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
-import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
@@ -35,17 +31,10 @@ public class CsDrawable {
      */
     private boolean visibility;
 
-    CsDrawable(Context context, @DrawableRes int drawableRes){
-        this(context, ContextCompat.getDrawable(context, drawableRes));
-    }
-
-    CsDrawable(Context context, Drawable drawable){
-        if (drawable == null){
-            throw new IllegalArgumentException("drawable can't be null");
-        }
-        if (context == null){
-            throw new IllegalArgumentException("context can't be null");
-        }
+    /**
+     * Internal constructor
+     */
+    CsDrawable(@NonNull Context context, @NonNull Drawable drawable){
         this.context = context.getApplicationContext();
         this.drawable = drawable;
         this.visibility = true;
@@ -64,12 +53,8 @@ public class CsDrawable {
         return drawable;
     }
 
-    public @Nullable Drawable getDrawableIfVisible(){
+    @Nullable Drawable getDrawableIfVisible(){
         return visibility ? drawable : null;
-    }
-
-    private Context getContext(){
-        return context;
     }
 
     /**
@@ -108,14 +93,22 @@ public class CsDrawable {
 
         private CsDrawable csDrawable;
 
-        public Builder(Context context, @NonNull Drawable drawable){
+        public Builder(@NonNull Context context, @DrawableRes int drawableRes){
+            this(context, ContextCompat.getDrawable(context, drawableRes));
+        }
+
+        public Builder(@NonNull Context context, Drawable drawable){
+            if (drawable == null){
+                throw new IllegalArgumentException("drawable can't be null");
+            }
             csDrawable = new CsDrawable(context, drawable);
         }
 
-        public Builder(Context context, @DrawableRes int drawableRes){
-            csDrawable = new CsDrawable(context, drawableRes);
-        }
-
+        /**
+         * set the drawable size in pixels
+         * @param pixelHeight target height in pixel
+         * @param pixelWidth target width in pixel
+         */
         public Builder setDrawablePixelSize(int pixelHeight, int pixelWidth){
             if (validateSizeParams(pixelHeight, pixelWidth)) {
                 csDrawable.setDrawablePixelSize(pixelHeight, pixelWidth);
@@ -123,6 +116,11 @@ public class CsDrawable {
             return this;
         }
 
+        /**
+         * set the drawable size in DP
+         * @param dpHeight target height in DP
+         * @param dpWidth target width in DP
+         */
         public Builder setDrawableDpSize(int dpHeight, int dpWidth){
             if (validateSizeParams(dpHeight, dpWidth)) {
                 csDrawable.setDrawableDpSize(dpHeight, dpWidth);
@@ -130,39 +128,12 @@ public class CsDrawable {
             return this;
         }
 
+        /**
+         * set the initial visibility of the drawable
+         * @param visible default false
+         */
         public Builder setVisibility(boolean visible){
             csDrawable.setVisibility(visible);
-            return this;
-        }
-
-        /**
-         * Set the tint for the current drawable
-         * @param color the color to add to the drawable
-         */
-        public Builder setTint(@ColorRes int color){
-            if (color == 0){
-                throw new IllegalArgumentException("0 is not a valid color");
-            }
-            DrawableCompat.setTint(csDrawable.getDrawable(),
-                    csDrawable.getContext().getResources().getColor(color));
-            return this;
-        }
-
-        /**
-         * Set the tint for the current drawable
-         * @param tintList the colorStateList to add to the drawable
-         */
-        public Builder setTintList(@NonNull ColorStateList tintList){
-            DrawableCompat.setTintList(csDrawable.getDrawable(), tintList);
-            return this;
-        }
-
-        /**
-         * Set the tint for the current drawable
-         * @param mode the mode to use
-         */
-        public Builder setTintMode(@NonNull PorterDuff.Mode mode){
-            DrawableCompat.setTintMode(csDrawable.getDrawable(), mode);
             return this;
         }
 

@@ -2,6 +2,7 @@ package com.matpag.clickdrawabletextview;
 
 import android.content.Context;
 import android.support.v7.widget.AppCompatTextView;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 
 import com.matpag.clickdrawabletextview.interfaces.ClickableDrawable;
@@ -105,6 +106,22 @@ public class ClickDrawableTextView extends AppCompatTextView implements Clickabl
     @Override
     public void removeAllCsDrawables() {
         mCsDrawableViewManager.removeAllCsDrawables();
+    }
+
+    @Override
+    public void addTextChangedListener(TextWatcher watcher) {
+        super.addTextChangedListener(watcher);
+        if (mCsDrawableViewManager != null){
+            mCsDrawableViewManager.addTextWatcher(watcher);
+        }
+    }
+
+    @Override
+    public void removeTextChangedListener(TextWatcher watcher) {
+        super.removeTextChangedListener(watcher);
+        if (mCsDrawableViewManager != null){
+            mCsDrawableViewManager.removeTextWatcher();
+        }
     }
 
 }
