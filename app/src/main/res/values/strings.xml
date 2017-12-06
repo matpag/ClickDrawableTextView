@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">ClickDrawable Showcase</string>
+
+    <string name="first_example">ClickDrawableEditText - Surrounded</string>
+    <string name="second_example">ClickDrawableEdiText - Search</string>
+    <string name="second_example_hint">Search something</string>
+    <string name="third_example">ClickDrawableAutoCompleteTextView</string>
+    <string name="third_example_hint">Type an animal name</string>
+
 </resources>

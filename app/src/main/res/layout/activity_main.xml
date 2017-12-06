@@ -16,10 +16,11 @@
             android:layout_marginTop="5dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="ClickDrawableEditText - Surrounded"
+            android:text="@string/first_example"
             android:textSize="15sp"
             android:gravity="center_horizontal"
-            android:textColor="@android:color/darker_gray"/>
+            android:textColor="@android:color/darker_gray"
+            />
 
         <com.matpag.clickdrawabletextview.ClickDrawableEditText
             android:id="@+id/click_drawable_edit_text"
@@ -47,13 +48,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="ClickDrawableEdiText - Search"
+            android:text="@string/second_example"
             android:textSize="15sp"
             android:gravity="center_horizontal"
-            android:textColor="@android:color/darker_gray"/>
+            android:textColor="@android:color/darker_gray"
+            />
 
         <com.matpag.clickdrawabletextview.ClickDrawableEditText
-            android:hint="Search something"
+            android:hint="@string/second_example_hint"
             android:id="@+id/click_drawable_search_edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -69,13 +71,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:text="ClickDrawableAutoCompleteTextView"
+            android:text="@string/third_example"
             android:textSize="15sp"
             android:gravity="center_horizontal"
-            android:textColor="@android:color/darker_gray"/>
+            android:textColor="@android:color/darker_gray"
+            />
 
         <com.matpag.clickdrawabletextview.ClickDrawableAutoCompleteTextView
-            android:hint="Type an animal name"
+            android:hint="@string/third_example_hint"
             android:id="@+id/click_drawable_auto_text_view"
             android:layout_width="match_parent"
             android:padding="20dp"

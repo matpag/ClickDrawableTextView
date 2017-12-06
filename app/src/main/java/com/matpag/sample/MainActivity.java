@@ -1,6 +1,9 @@
 package com.matpag.sample;
 
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
+import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
@@ -48,10 +51,15 @@ public class MainActivity extends AppCompatActivity {
                 findViewById(R.id.click_drawable_auto_text_view);
 
         //build a CsDrawable object with a PGN drawable
-        CsDrawable csDrawable1 = new CsDrawable.Builder(this, R.drawable.ic_close_black_24dp)
+        Drawable closeDrawable = ContextCompat.getDrawable(this,
+                R.drawable.ic_close_black_24dp);
+        assert closeDrawable != null;
+        //tint the vector drawable with red
+        DrawableCompat.setTint(closeDrawable, getResources().getColor(R.color.close_red));
+        //create a csdrawable with the configured drawable
+        CsDrawable csDrawable1 = new CsDrawable.Builder(this, closeDrawable)
                 .setDrawableDpSize(30, 30)
                 .setVisibility(false)
-                .setTint(R.color.close_red)
                 .build();
 
         //add to the END
