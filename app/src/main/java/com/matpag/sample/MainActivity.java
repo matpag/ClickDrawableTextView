@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         final ClickDrawableAutoCompleteTextView mCdAutoComplete =
                 findViewById(R.id.click_drawable_auto_text_view);
 
-        //build a CsDrawable object with a PGN drawable
+        //build a CsDrawable object with a vector drawable
         Drawable closeDrawable = ContextCompat.getDrawable(this,
                 R.drawable.ic_close_black_24dp);
         assert closeDrawable != null;
