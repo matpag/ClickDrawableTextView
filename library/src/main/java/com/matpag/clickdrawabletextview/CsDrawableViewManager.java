@@ -10,7 +10,6 @@ import android.graphics.PorterDuff;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.graphics.drawable.DrawableCompat;
-import android.text.SpannableStringBuilder;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
@@ -25,10 +24,7 @@ import com.matpag.clickdrawabletextview.interfaces.ClickableDrawable;
 import com.matpag.clickdrawabletextview.interfaces.OnDrawableClickListener;
 
 /**
- *
- * Non sarà assolutamente supportato il fatto che il width e l'height del campo varino a runtime,
- * perchè non so come possiamo fare sinceramente, forse bisogna collegarsi all'evento onSizeChanged
- * ma solo dopo aver passato la prima inizializzazione
+ * Wrapper manager for all the ClickDrawableViews which contains the shared logic
  *
  * Created by Mattia Pagini on 23/04/2017.
  */
@@ -279,6 +275,7 @@ final class CsDrawableViewManager implements ClickableDrawable {
      */
     @SuppressLint("ClickableViewAccessibility")
     private void setViewOnTouchListener(){
+        //noinspection ClickableViewAccessibility
         view.setOnTouchListener((v, e) -> {
             switch (e.getAction()) {
                 case MotionEvent.ACTION_DOWN: {
@@ -439,8 +436,8 @@ final class CsDrawableViewManager implements ClickableDrawable {
             if (mViewTextWatcher == null){
                 view.setText(view.getText());
             } else {
-                //workaround a problem with some keyboard implementation like SwiftKey, where they
-                //don't remove the underline from ext even when the keyboard is closed
+                //workaround a problem with some keyboard implementations like SwiftKey, where they
+                //don't remove the underline from text even when the keyboard is closed
                 view.removeTextChangedListener(mViewTextWatcher);
                 view.setText(view.getText());
                 view.addTextChangedListener(mViewTextWatcher);
