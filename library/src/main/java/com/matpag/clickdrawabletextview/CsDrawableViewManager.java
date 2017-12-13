@@ -275,7 +275,6 @@ final class CsDrawableViewManager implements ClickableDrawable {
      */
     @SuppressLint("ClickableViewAccessibility")
     private void setViewOnTouchListener(){
-        //noinspection ClickableViewAccessibility
         view.setOnTouchListener((v, e) -> {
             switch (e.getAction()) {
                 case MotionEvent.ACTION_DOWN: {
@@ -300,13 +299,16 @@ final class CsDrawableViewManager implements ClickableDrawable {
                     break;
                 }
                 case MotionEvent.ACTION_UP: {
+                    // dispatch accessibility events even if the touch didn't hit the drawable
+                    // (the lint checker is still complaining about this and the suppress warning
+                    // is ignored).
+                    // if enableTouchOnText is false should we call this?
+                    view.performClick();
+                    // proceed with the drawable touch logic
                     long eventDuration = e.getEventTime() - e.getDownTime();
                     if (mTouchedPosition != null){
                         if ((eventDuration < MAX_CLICK_DURATION) && stayedWithinClickDistance) {
                             dispatchDrawableClickEvent();
-                            //dispatch accessibility events (even if the lint checker is still
-                            //complaining about this)
-                            view.performClick();
                         }
                         resetTouchedDrawable();
                         return true;
@@ -422,7 +424,7 @@ final class CsDrawableViewManager implements ClickableDrawable {
 
     @Override
     public void disableFocusOnText(boolean preventReFocus, boolean closeKeyboard) {
-        //block refocus on others edittext
+        //block refocus on others EditText on the same ViewGroup
         if (preventReFocus) {
             ViewGroup rootView = (ViewGroup) view.getRootView();
             int dfValue = rootView.getDescendantFocusability();
@@ -433,11 +435,13 @@ final class CsDrawableViewManager implements ClickableDrawable {
             view.clearFocus();
         }
         if (closeKeyboard){
+            //workaround a problem with some keyboard implementations like SwiftKey, where they
+            //don't remove the underline from text even when the keyboard is closed
             if (mViewTextWatcher == null){
                 view.setText(view.getText());
             } else {
-                //workaround a problem with some keyboard implementations like SwiftKey, where they
-                //don't remove the underline from text even when the keyboard is closed
+                //if a TextWatcher is present remove it before calling setText or it could result
+                //in false positive changes in the user code
                 view.removeTextChangedListener(mViewTextWatcher);
                 view.setText(view.getText());
                 view.addTextChangedListener(mViewTextWatcher);
