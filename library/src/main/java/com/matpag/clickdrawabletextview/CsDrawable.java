@@ -6,6 +6,7 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.util.DisplayMetrics;
 import android.util.TypedValue;
 
@@ -93,13 +94,52 @@ public class CsDrawable {
 
         private CsDrawable csDrawable;
 
-        public Builder(@NonNull Context context, @DrawableRes int drawableRes){
-            this(context, ContextCompat.getDrawable(context, drawableRes));
+        /**
+         * Builder to create a {@link CsDrawable} object
+         * @param context Any context
+         * @param drawable A {@link Drawable} object, if you want a mutable drawable (to prevent
+         *                 state sharing between drawable with the same origin) you should check
+         *                 {@link #Builder(Context, Drawable, boolean)} instead. Or you can provide
+         *                 an already muted {@link Drawable} object.
+         */
+        public Builder(@NonNull Context context, Drawable drawable){
+            this (context, drawable, false);
         }
 
-        public Builder(@NonNull Context context, Drawable drawable){
+        /**
+         *
+         * @param context Any context
+         * @param drawableRes A {@link DrawableRes} resourceId pointing to a drawable like a PNG or
+         *                    a {@link android.graphics.drawable.VectorDrawable}
+         * @param mutable If you want make the drawable mutable (to prevent
+         *                state sharing between drawable with the same origin).
+         *                Read <a href="https://developer.android.com/reference/android/graphics/drawable/Drawable.html#mutate()">here</a>
+         *                for more info.<br/>
+         *                This is usefull for tinting or other things which should act only on the
+         *                specific drawable object and not at global level.
+         */
+        public Builder(@NonNull Context context, @DrawableRes int drawableRes, boolean mutable){
+            this(context, ContextCompat.getDrawable(context, drawableRes), mutable);
+        }
+
+        /**
+         *
+         * @param context Any context
+         * @param drawable A {@link Drawable} object
+         * @param mutable If you want make the drawable mutable (to prevent
+         *                state sharing between drawable with the same origin).
+         *                Read <a href="https://developer.android.com/reference/android/graphics/drawable/Drawable.html#mutate()">here</a>
+         *                for more info.
+         *                This is usefull for tinting or other things which should act only on the
+         *                specific drawable object and not at global level.
+         */
+        public Builder(@NonNull Context context, Drawable drawable, boolean mutable){
             if (drawable == null){
                 throw new IllegalArgumentException("drawable can't be null");
+            }
+            if (mutable) {
+                Drawable wrappedDrawable = DrawableCompat.wrap(drawable);
+                drawable = wrappedDrawable.mutate();
             }
             csDrawable = new CsDrawable(context, drawable);
         }
