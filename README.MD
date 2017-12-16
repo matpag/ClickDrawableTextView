@@ -44,7 +44,12 @@ This GIF shows a ```ClickDrawableEditText``` with clickable drawables all around
 This library is minSdk 16
 
 ### 1. Add dependency in build.gradle
-```implementation 'com.matpag:clickdrawabletextview:2.0.2'```
+```gradle
+   implementation "com.matpag:clickdrawabletextview:3.0.0@aar"
+
+   //required dependency
+   implementation "com.android.support:appcompat-v7:${versions.supportLib}"
+```
 
 ### 2. Use a support theme
 Use one of the theme from ```Theme.AppCompat.*``` for your application theme.
