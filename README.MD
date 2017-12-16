@@ -5,7 +5,7 @@ with ```android:drawableStart``` etc... or in code with ```setCompoundDrawables(
 Also with this library you can flat a layout used to side any widget with an ```ImageView``` or ```ImageButton``` added to listen for click on the icon, to one unique custom view.
 
 For example converting this XML:
-```
+```xml
 <LinearLayout 
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -23,7 +23,7 @@ For example converting this XML:
 </LinearLayout> 
 ```
 Into this:
-```
+```xml
 <com.matpag.clickdrawabletextview.ClickDrawableTextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -68,7 +68,7 @@ application class instead of the default one adding the
 where you created the ```AppApplication``` class) to the manifest if you already didn't.
 
 Something similar to this:
-```
+```xml
 <application
         android:name=".AppApplication"
         android:allowBackup="true"
@@ -102,14 +102,14 @@ You can add a ```CsDrawable``` via XML or via Code, below you can find both the 
 
 #### XML
 After declaring
-```
+```xml
 xmlns:app="http://schemas.android.com/apk/res-auto"
 ```
 in the top parent layout, you can specify the custom properties shown below in any of the
 supported views.
 
 To add the drawable to the view in position you need, you can use:
-```
+```xml
 app:csStartDrawable="@drawable/my_icon"
 app:csEndDrawable="@drawable/my_icon"
 app:csTopDrawable="@drawable/my_icon"
@@ -120,29 +120,29 @@ providing a reference to a drawable of any type (png, xml drawable, vector drawa
 If you don't specify any size for the drawable, automatically the drawable will be sized to the width and height of the drawable itself (called **intrinsic** in the android platform).
 
 If you dont want to resize your original drawable resource (and you really shouldn't if not necessary), i suggest you to specify the width and the height in **dp** you need using:
-```
+```xml
 app:csStartDrawableHeight="30dp"
 app:csStartDrawableWidth="30dp"
 ```
 for the **Start** drawable
-```
+```xml
 app:csEndDrawableHeight="30dp"
 app:csEndDrawableWidth="30dp"
 ```
 for the **End** drawable
-```
+```xml
 app:csTopDrawableHeight="30dp"
 app:csTopDrawableWidth="30dp"
 ```
 for the **Top** drawable
-```
+```xml
 app:csBottomDrawableHeight="30dp"
 app:csBottomDrawableWidth="30dp"
 ```
 for the **Bottom** drawable.
 
 If you need to handle the initial visibility of the drawable(s) you can use
-```
+```xml
 app:csStartDrawableVisible
 app:csEndDrawableVisible
 app:csTopDrawableVisible
@@ -151,14 +151,14 @@ app:csBottomDrawableVisible
 (default is true)
 
 You can add a ```Tint```(Single color or reference to ColorStateList) and a ```TintMode``` to the drawable(s) with
-```
+```xml
 app:csStartDrawableTint
 app:csEndDrawableTint
 app:csTopDrawableTint
 app:csBottomDrawableTint
 ```
 
-```
+```xml
 app:csStartDrawableTintMode
 app:csEndDrawableTintMode
 app:csTopDrawableTintMode
@@ -168,7 +168,7 @@ app:csBottomDrawableTintMode
 #### Code
 
 Use this XML as example
-```
+```xml
 <com.matpag.clickdrawabletextview.ClickDrawableEditText
         android:id="@+id/click_drawable_edit_text"
         android:layout_width="match_parent"
