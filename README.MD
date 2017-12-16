@@ -143,12 +143,27 @@ for the **Bottom** drawable.
 
 If you need to handle the initial visibility of the drawable(s) you can use
 ```
-app:csStartDrawableVisible="true | false"
-app:csEndDrawableVisible"true | false"
-app:csTopDrawableVisible"true | false"
-app:csBottomDrawableVisible"true | false"
+app:csStartDrawableVisible
+app:csEndDrawableVisible
+app:csTopDrawableVisible
+app:csBottomDrawableVisible
 ```
 (default is true)
+
+You can add a ```Tint```(Single color or reference to ColorStateList) and a ```TintMode``` to the drawable(s) with
+```
+app:csStartDrawableTint
+app:csEndDrawableTint
+app:csTopDrawableTint
+app:csBottomDrawableTint
+```
+
+```
+app:csStartDrawableTintMode
+app:csEndDrawableTintMode
+app:csTopDrawableTintMode
+app:csBottomDrawableTintMode
+```
 
 #### Code
 
@@ -168,7 +183,7 @@ ClickDrawableEditText mCdEditText = (ClickDrawableEditText)findViewById(R.id.cli
 Create a ```CsDrawable``` object using the builder class
 
 ```java
-CsDrawable csDrawable = new CsDrawable.Builder(this, R.drawable.ic_close_red_24dp)
+CsDrawable csDrawable = new CsDrawable.Builder(this, R.drawable.ic_close_red_24dp, true)
                 .setDrawableDpSize(30, 30) //or .setDrawablePixelSize(width, height) for pixel
                 .setVisibility(false) //optional, default true
                 .build();
