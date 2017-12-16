@@ -112,12 +112,12 @@ final class CsDrawableViewManager implements ClickableDrawable {
                 ColorStateList tintColor = a.getColorStateList(
                         R.styleable.CsDrawableViewManager_csStartDrawableTint);
                 if (tintColor != null){
-                    DrawableCompat.setTintList(mEndDrawable.getDrawable(), tintColor);
+                    DrawableCompat.setTintList(mStartDrawable.getDrawable(), tintColor);
                 }
                 PorterDuff.Mode tintMode = parseTintMode(a.getInt(
                         R.styleable.CsDrawableViewManager_csStartDrawableTintMode, -1));
                 if (tintMode != null){
-                    DrawableCompat.setTintMode(mEndDrawable.getDrawable(), tintMode);
+                    DrawableCompat.setTintMode(mStartDrawable.getDrawable(), tintMode);
                 }
             }
 
@@ -139,12 +139,12 @@ final class CsDrawableViewManager implements ClickableDrawable {
                 ColorStateList tintColor = a.getColorStateList(
                         R.styleable.CsDrawableViewManager_csTopDrawableTint);
                 if (tintColor != null){
-                    DrawableCompat.setTintList(mEndDrawable.getDrawable(), tintColor);
+                    DrawableCompat.setTintList(mTopDrawable.getDrawable(), tintColor);
                 }
                 PorterDuff.Mode tintMode = parseTintMode(a.getInt(
                         R.styleable.CsDrawableViewManager_csTopDrawableTintMode, -1));
                 if (tintMode != null){
-                    DrawableCompat.setTintMode(mEndDrawable.getDrawable(), tintMode);
+                    DrawableCompat.setTintMode(mTopDrawable.getDrawable(), tintMode);
                 }
             }
 
@@ -193,12 +193,12 @@ final class CsDrawableViewManager implements ClickableDrawable {
                 ColorStateList tintColor = a.getColorStateList(
                         R.styleable.CsDrawableViewManager_csBottomDrawableTint);
                 if (tintColor != null){
-                    DrawableCompat.setTintList(mEndDrawable.getDrawable(), tintColor);
+                    DrawableCompat.setTintList(mBottomDrawable.getDrawable(), tintColor);
                 }
                 PorterDuff.Mode tintMode = parseTintMode(a.getInt(
                         R.styleable.CsDrawableViewManager_csBottomDrawableTintMode, -1));
                 if (tintMode != null){
-                    DrawableCompat.setTintMode(mEndDrawable.getDrawable(), tintMode);
+                    DrawableCompat.setTintMode(mBottomDrawable.getDrawable(), tintMode);
                 }
             }
 
