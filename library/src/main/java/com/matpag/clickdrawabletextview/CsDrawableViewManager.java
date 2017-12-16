@@ -20,7 +20,6 @@ import android.view.ViewGroup;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.TextView;
 
-import com.matpag.clickdrawabletextview.interfaces.ClickableDrawable;
 import com.matpag.clickdrawabletextview.interfaces.OnDrawableClickListener;
 
 /**

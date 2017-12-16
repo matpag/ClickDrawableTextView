@@ -5,7 +5,6 @@ import android.support.v7.widget.AppCompatAutoCompleteTextView;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
 
-import com.matpag.clickdrawabletextview.interfaces.ClickableDrawable;
 import com.matpag.clickdrawabletextview.interfaces.OnDrawableClickListener;
 
 /**

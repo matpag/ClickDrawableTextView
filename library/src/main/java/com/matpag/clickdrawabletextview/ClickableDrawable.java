@@ -1,6 +1,6 @@
-package com.matpag.clickdrawabletextview.interfaces;
+package com.matpag.clickdrawabletextview;
 
-import com.matpag.clickdrawabletextview.CsDrawable;
+import com.matpag.clickdrawabletextview.interfaces.OnDrawableClickListener;
 
 /**
  * The interface that every {@link android.widget.TextView} subclass need to implement to add
@@ -8,7 +8,7 @@ import com.matpag.clickdrawabletextview.CsDrawable;
  *
  * Created by Mattia Pagini on 24/04/2017.
  */
-public interface ClickableDrawable {
+interface ClickableDrawable {
 
     /**
      * Setup the listener to listen for the click events on the drawables
