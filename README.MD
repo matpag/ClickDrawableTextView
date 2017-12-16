@@ -35,13 +35,14 @@ Into this:
 Removing a ViewGroup, removing inefficient weights and adding a lot more functionalities.
 
 ## Demo
-This GIF shows a ```ClickDrawableEditText``` with clickable drawables all around it (please never do this in a real app, it's really unpleasant :D) and a ```ClickDrawableAutoCompleteTextView``` with support for blocking inputs after user choice, until cancel icon is pressed. You can play with an interactive demo [here](https://appetize.io/app/2uwa0j45wj79mc1k6b1rmcf4tr?device=nexus5&scale=75&orientation=portrait&osVersion=7.0) (until reaching the free monthly usege quota, then the link will stop working)
+This GIF shows a ```ClickDrawableEditText``` with clickable drawables all around it (please never do this in a real app, it's really unpleasant :D) and a ```ClickDrawableAutoCompleteTextView``` with support for blocking inputs after user choice, until cancel icon is pressed.
+You can play with an interactive demo [here](https://appetize.io/app/9v3t7hcj8wcc93aceqwehhru80?device=nexus5&scale=75&orientation=portrait&osVersion=7.1)
 
 ![Library showcase](https://media.giphy.com/media/xUA7aXqmppLR7a0JfG/giphy.gif)
 
 ## Setup
 
-This library is minSdk 16
+###### This library is minSdk 16
 
 ### 1. Add dependency in build.gradle
 ```gradle
