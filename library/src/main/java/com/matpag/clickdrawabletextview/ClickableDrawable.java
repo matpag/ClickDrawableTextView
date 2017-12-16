@@ -102,11 +102,12 @@ interface ClickableDrawable {
 
     /**
      * Helper method to close the keyboard if the IME is currently opened.
-     * <br/><br/>
-     * WARNING<br/>
+     * <p>WARNING</p>
+     * <p>
      * This is a small utility which aims to provide a basic functionality which depends a lot
      * on the keyboard application the user it's using, your view and inputMethod settings.
      * So if this method is not working you probably need to provide your custom implementation.
+     * </p>
      */
     void closeKeyboard();
 

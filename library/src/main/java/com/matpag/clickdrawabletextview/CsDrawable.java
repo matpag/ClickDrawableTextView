@@ -99,8 +99,8 @@ public class CsDrawable {
          * @param context Any context
          * @param drawable A {@link Drawable} object, if you want a mutable drawable (to prevent
          *                 state sharing between drawable with the same origin) you should check
-         *                 {@link #Builder(Context, Drawable, boolean)} instead. Or you can provide
-         *                 an already muted {@link Drawable} object.
+         *                 {@link Builder#Builder(Context, Drawable, boolean)} instead.
+         *                 Or you can provide an already mutated {@link Drawable} object.
          */
         public Builder(@NonNull Context context, Drawable drawable){
             this (context, drawable, false);
@@ -114,9 +114,9 @@ public class CsDrawable {
          * @param mutable If you want make the drawable mutable (to prevent
          *                state sharing between drawable with the same origin).
          *                Read <a href="https://developer.android.com/reference/android/graphics/drawable/Drawable.html#mutate()">here</a>
-         *                for more info.<br/>
-         *                This is usefull for tinting or other things which should act only on the
-         *                specific drawable object and not at global level.
+         *                for more info.
+         *                <p>This is usefull for tinting or other things which should act only on the
+         *                specific drawable object and not at global level.</p>
          */
         public Builder(@NonNull Context context, @DrawableRes int drawableRes, boolean mutable){
             this(context, ContextCompat.getDrawable(context, drawableRes), mutable);
@@ -126,7 +126,7 @@ public class CsDrawable {
          *
          * @param context Any context
          * @param drawable A {@link Drawable} object
-         * @param mutable If you want make the drawable mutable (to prevent
+         * @param mutable Pass <code>true</code> if you want make the drawable mutable (to prevent
          *                state sharing between drawable with the same origin).
          *                Read <a href="https://developer.android.com/reference/android/graphics/drawable/Drawable.html#mutate()">here</a>
          *                for more info.
