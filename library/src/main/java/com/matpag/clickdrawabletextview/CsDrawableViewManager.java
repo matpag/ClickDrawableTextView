@@ -31,6 +31,11 @@ import com.matpag.clickdrawabletextview.interfaces.OnDrawableClickListener;
 
 final class CsDrawableViewManager implements ClickableDrawable {
 
+    /**
+     * This is the reference to the current {@link ClickableDrawable} subclass, one of the view
+     * between {@link ClickDrawableTextView}, {@link ClickDrawableEditText} or
+     * {@link ClickDrawableAutoCompleteTextView}
+     */
     private TextView view;
 
     private Context mContext;
@@ -41,6 +46,7 @@ final class CsDrawableViewManager implements ClickableDrawable {
     private CsDrawable mEndDrawable;
     private CsDrawable mBottomDrawable;
 
+    //the position of the last valid touch performed on one of the drawable
     private DrawablePosition mTouchedPosition;
 
     private static DisplayMetrics mMetrics;
@@ -86,17 +92,18 @@ final class CsDrawableViewManager implements ClickableDrawable {
      */
     void init(Context context, AttributeSet attrs) {
         mContext = context;
-
+        mMetrics = context.getResources().getDisplayMetrics();
         mConfig = context.getResources().getConfiguration();
 
         if (attrs != null) {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CsDrawableViewManager);
 
-            mMetrics = context.getResources().getDisplayMetrics();
-
-            Drawable startDrawable = a.getDrawable(
+            Drawable startUnwrappedDrawable = a.getDrawable(
                     R.styleable.CsDrawableViewManager_csStartDrawable);
-            if (startDrawable != null) {
+
+            if (startUnwrappedDrawable != null) {
+                Drawable startDrawable = DrawableCompat.wrap(startUnwrappedDrawable);
+                startDrawable = startDrawable.mutate();
                 mStartDrawable = new CsDrawable(context, startDrawable);
                 int height = a.getDimensionPixelSize(
                         R.styleable.CsDrawableViewManager_csStartDrawableHeight, -1);
@@ -121,9 +128,11 @@ final class CsDrawableViewManager implements ClickableDrawable {
                 }
             }
 
-            Drawable topDrawable = a.getDrawable(
+            Drawable topUnwrappedDrawable = a.getDrawable(
                     R.styleable.CsDrawableViewManager_csTopDrawable);
-            if (topDrawable != null) {
+            if (topUnwrappedDrawable != null) {
+                Drawable topDrawable = DrawableCompat.wrap(topUnwrappedDrawable);
+                topDrawable = topDrawable.mutate();
                 mTopDrawable = new CsDrawable(context, topDrawable);
                 int height = a.getDimensionPixelSize(
                         R.styleable.CsDrawableViewManager_csTopDrawableHeight, -1);
@@ -148,9 +157,11 @@ final class CsDrawableViewManager implements ClickableDrawable {
                 }
             }
 
-            Drawable endDrawable = a.getDrawable(
+            Drawable endUnwrappedDrawable = a.getDrawable(
                     R.styleable.CsDrawableViewManager_csEndDrawable);
-            if (endDrawable != null) {
+            if (endUnwrappedDrawable != null) {
+                Drawable endDrawable = DrawableCompat.wrap(endUnwrappedDrawable);
+                endDrawable = endDrawable.mutate();
                 mEndDrawable = new CsDrawable(context, endDrawable);
                 int height = a.getDimensionPixelSize(
                         R.styleable.CsDrawableViewManager_csEndDrawableHeight, -1);
@@ -175,9 +186,11 @@ final class CsDrawableViewManager implements ClickableDrawable {
                 }
             }
 
-            Drawable bottomDrawable = a.getDrawable(
+            Drawable bottomUnwrappedDrawable = a.getDrawable(
                     R.styleable.CsDrawableViewManager_csBottomDrawable);
-            if (bottomDrawable != null) {
+            if (bottomUnwrappedDrawable != null) {
+                Drawable bottomDrawable = DrawableCompat.wrap(bottomUnwrappedDrawable);
+                bottomDrawable = bottomDrawable.mutate();
                 mBottomDrawable = new CsDrawable(context, bottomDrawable);
                 int height = a.getDimensionPixelSize(
                         R.styleable.CsDrawableViewManager_csBottomDrawableHeight, -1);
