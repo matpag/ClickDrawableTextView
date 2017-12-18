@@ -42,7 +42,7 @@ You can play with an interactive demo [here](https://appetize.io/app/9v3t7hcj8wc
 
 ## Setup
 
-###### This library is minSdk 16
+##### This library is minSdk 16 (Android 4.1 Jelly Bean)
 
 ### 1. Add dependency in build.gradle
 ```gradle
@@ -156,7 +156,7 @@ app:csBottomDrawableVisible
 ```
 (default is true)
 
-You can add a ```Tint```(Single color or reference to ColorStateList) and a ```TintMode``` to the drawable(s) with
+You can add a ```Tint```(Single color or reference to ```ColorStateList```) and a ```TintMode``` to the drawable(s) with
 ```xml
 app:csStartDrawableTint
 app:csEndDrawableTint
@@ -241,20 +241,18 @@ viewInstance.setOnDrawableClickListener(new OnDrawableClickListener() {
 ### Advanced features
 If you need to block the user after some action, for example after selecting an item in the ```ClickDrawableAutoCompleteTextView``` dropdown.
 You can prevent the view from receiving the focus for editing with 
-```viewInstance.disableFocusOnText(boolean preventReFocus, boolean closeKeyboard)``` 
-
-(Don't use *```setEnabled(false)```*, because this prevent the dispatch of all touch events).
+```viewInstance.disableFocusOnText(boolean preventReFocus, boolean closeKeyboard)```
 
 ```preventReFocus``` : Passing ```true```, will prevent re-focus on another EditText in the same ViewGroup (if present)
 
 ```closeKeyboard``` : Passing ```true```, will close the keyboard (if actually open)
 
-Then if the user press the cancel icon, you should re-enable the editing on the view to let him pick another choice using 
+To re-enable the editing on the view simply call
 ```viewInstance.enableFocusOnText(boolean openKeyboard);```
 
 ```openKeyboard``` : Passing ```true```, will open the keyboard automatically (if actually closed)
 
-You can find a concrete example of this use case in the app module of the repository, in the [MainActivity](https://github.com/matpag/ClickDrawableTextView/blob/master/app/src/main/java/com/matpag/sample/MainActivity.java)
+You can find a concrete example of this use case in the sample app of the repository, in the [ClickDrawableAutoCompleteTextView configured in MainActivity](https://github.com/matpag/ClickDrawableTextView/blob/master/app/src/main/java/com/matpag/sample/MainActivity.java)
 
 ## Author
 
