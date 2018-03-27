@@ -6,7 +6,7 @@ buildscript {
         jcenter()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.0'
         classpath 'com.novoda:bintray-release:0.8.0'
 
         // NOTE: Do not place your application dependencies here; they belong
@@ -17,11 +17,10 @@ buildscript {
     // project and then reference this from the modules
     ext {
         setup = [compileSdk: 27,
-                 buildTools: "27.0.2",
                  minSdk    : 16,
                  targetSdk : 27]
 
-        versions = [supportLib: "27.0.2"]
+        versions = [supportLib: "27.1.0"]
     }
 }
 
