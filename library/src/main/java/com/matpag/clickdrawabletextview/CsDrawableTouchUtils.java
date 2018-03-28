@@ -16,7 +16,7 @@ final class CsDrawableTouchUtils {
      * <p>vSpace = vertical space available in the TextView</p>
      * <p>hSpace = horizontal space available in the TextView</p>
      */
-    private int vSpace, hSpace = -1;
+    private int vSpace, hSpace;
 
     /**
      * <p>hHeight = half height of the drawable bounds</p>
@@ -83,20 +83,20 @@ final class CsDrawableTouchUtils {
         }
     }
 
-    boolean isTopDrawableTouched(CsDrawable drawable){
-        hHeight = drawable.getDrawable().getBounds().height() / 2;
-        hWidth = drawable.getDrawable().getBounds().width() / 2;
-        centerX = scrollX + view.getCompoundPaddingLeft() + hSpace / 2;
-        centerY = scrollY + view.getPaddingTop() + hHeight;
-        return isClickInsideDrawableBounds();
-    }
-
     boolean isEndDrawableTouched(CsDrawable drawable){
         if (isLayoutRTL){
             return isLeftDrawableTouched(drawable);
         } else {
             return isRightDrawableTouched(drawable);
         }
+    }
+
+    boolean isTopDrawableTouched(CsDrawable drawable){
+        hHeight = drawable.getDrawable().getBounds().height() / 2;
+        hWidth = drawable.getDrawable().getBounds().width() / 2;
+        centerX = scrollX + view.getCompoundPaddingLeft() + hSpace / 2;
+        centerY = scrollY + view.getPaddingTop() + hHeight;
+        return isClickInsideDrawableBounds();
     }
 
     boolean isBottomDrawableTouched(CsDrawable drawable){
@@ -106,7 +106,6 @@ final class CsDrawableTouchUtils {
         centerY = scrollY + view.getHeight() - view.getPaddingBottom() - hHeight;
         return isClickInsideDrawableBounds();
     }
-
 
     private boolean isLeftDrawableTouched(CsDrawable drawable){
         hHeight = drawable.getDrawable().getBounds().height() / 2;
