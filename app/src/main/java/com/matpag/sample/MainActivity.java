@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.widget.ArrayAdapter;
 import android.widget.Toast;
 
@@ -29,9 +30,11 @@ public class MainActivity extends AppCompatActivity {
         mCdEditText.setOnDrawableClickListener((view, position) -> {
             Toast.makeText(MainActivity.this, position.name(),
                     Toast.LENGTH_SHORT).show();
+            Log.e("on_click", "DRAWABLE_CLICKED");
             //close the keyboard if opened
             mCdEditText.closeKeyboard();
         });
+        mCdEditText.setOnClickListener(v -> Log.e("on_click", "EDITEXT_CLICKED"));
 
         //####### ClickDrawableEditText - search example ########
         //In this example we got the view from the XML, so go watch R.layout.activity_main to

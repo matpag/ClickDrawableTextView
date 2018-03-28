@@ -2,7 +2,6 @@ apply plugin: 'com.android.application'
 
 android {
     compileSdkVersion setup.compileSdk
-    buildToolsVersion setup.buildTools
 
     defaultConfig {
         applicationId "com.matpag.sample"
