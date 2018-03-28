@@ -1,3 +1,8 @@
+### v3.1.0 - 29/03/2018
+ - Fix a problem with accessibility click event
+ - Update AGP to 3.1.0
+ - Update Support Library to 27.1.0
+##
 ### v3.0.0 - 16/12/2017
  - Fix a problem with ```disableFocusOnText()``` method, with some keyboard application like SwiftKey the text underline didn't disappear after choice selection
  - Add ```cs{Position}DrawableTint``` XML property to set a tint specific to a ```CsDrawable```
