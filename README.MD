@@ -46,7 +46,7 @@ You can play with an interactive demo [here](https://appetize.io/app/9v3t7hcj8wc
 
 ### 1. Add dependency in build.gradle
 ```gradle
-   implementation "com.matpag:clickdrawabletextview:3.0.0@aar"
+   implementation "com.matpag:clickdrawabletextview:3.1.0@aar"
 
    //required dependency
    implementation "com.android.support:appcompat-v7:${versions.supportLib}"
