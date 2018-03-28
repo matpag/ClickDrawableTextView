@@ -291,7 +291,7 @@ final class CsDrawableViewManager implements ClickableDrawable {
             switch (e.getAction()) {
                 case MotionEvent.ACTION_DOWN: {
                     //if the user clicked on one of the drawables, save some datas about it
-                    if (isOneOfDrawablesTouched(e)) {
+                    if (isOneDrawableTouched(e)) {
                         pressedX = e.getX();
                         pressedY = e.getY();
                         stayedWithinClickDistance = true;
@@ -304,22 +304,19 @@ final class CsDrawableViewManager implements ClickableDrawable {
                 case MotionEvent.ACTION_MOVE: {
                     //if the user moved the finger to much far from the initial tap point,
                     //we cancel the touch on the drawable
-                    if (stayedWithinClickDistance && distance(pressedX, pressedY, e.getX(),
-                                    e.getY()) > MAX_CLICK_DISTANCE) {
+                    if (stayedWithinClickDistance &&
+                            distance(pressedX, pressedY, e.getX(), e.getY()) > MAX_CLICK_DISTANCE) {
                         stayedWithinClickDistance = false;
                     }
                     break;
                 }
                 case MotionEvent.ACTION_UP: {
-                    // dispatch accessibility events even if the touch didn't hit the drawable
-                    // (the lint checker is still complaining about this and the suppress warning
-                    // is ignored).
-                    // if enableTouchOnText is false should we call this?
-                    view.performClick();
                     // proceed with the drawable touch logic
                     long eventDuration = e.getEventTime() - e.getDownTime();
-                    if (mTouchedPosition != null){
+                    if (isOneDrawableTouching()){
                         if ((eventDuration < MAX_CLICK_DURATION) && stayedWithinClickDistance) {
+                            //dispatch accessibility events
+                            view.performClick();
                             dispatchDrawableClickEvent();
                         }
                         resetTouchedDrawable();
@@ -327,7 +324,7 @@ final class CsDrawableViewManager implements ClickableDrawable {
                     }
                 }
             }
-            return false;
+            return view.onTouchEvent(e);
         });
     }
 
@@ -336,7 +333,7 @@ final class CsDrawableViewManager implements ClickableDrawable {
      * the bounds of one of the showing drawables, if true set {@link #mTouchedPosition}
      * with one of correct values of {@link DrawablePosition}
      */
-    private boolean isOneOfDrawablesTouched(MotionEvent event){
+    private boolean isOneDrawableTouched(MotionEvent event){
         CsDrawableTouchUtils cdu = new CsDrawableTouchUtils(event, view, isLayoutRTL());
         if (mEndDrawable != null && mEndDrawable.isVisible()
                 && cdu.isEndDrawableTouched(mEndDrawable)){
@@ -365,6 +362,10 @@ final class CsDrawableViewManager implements ClickableDrawable {
 
     private void resetTouchedDrawable(){
         mTouchedPosition = null;
+    }
+
+    private boolean isOneDrawableTouching(){
+        return mTouchedPosition != null;
     }
 
 
