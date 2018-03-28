@@ -148,6 +148,8 @@ public class CsDrawable {
          * set the drawable size in pixels
          * @param pixelHeight target height in pixel
          * @param pixelWidth target width in pixel
+         *
+         * @return current instance
          */
         public Builder setDrawablePixelSize(int pixelHeight, int pixelWidth){
             if (validateSizeParams(pixelHeight, pixelWidth)) {
@@ -160,6 +162,8 @@ public class CsDrawable {
          * set the drawable size in DP
          * @param dpHeight target height in DP
          * @param dpWidth target width in DP
+         *
+         * @return current instance
          */
         public Builder setDrawableDpSize(int dpHeight, int dpWidth){
             if (validateSizeParams(dpHeight, dpWidth)) {
@@ -171,6 +175,8 @@ public class CsDrawable {
         /**
          * set the initial visibility of the drawable
          * @param visible default false
+         *
+         * @return current instance
          */
         public Builder setVisibility(boolean visible){
             csDrawable.setVisibility(visible);
