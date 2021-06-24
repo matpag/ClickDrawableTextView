@@ -1,5 +1,7 @@
 # ClickDrawable - TextView/EditText/AutoComplete
 
+### **Currently not mantained anymore but if you need help just open an issue**
+
 This library add the ability to listen for drawable click events for TextView, EditText and AutoCompleteTextView normally added in XML
 with ```android:drawableStart``` etc... or in code with ```setCompoundDrawables(...)``` and similar.
 Also with this library you can flat a layout used to side any widget with an ```ImageView``` or ```ImageButton``` added to listen for click on the icon, to one unique custom view.
